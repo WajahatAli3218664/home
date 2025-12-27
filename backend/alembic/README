@@ -1,0 +1,48 @@
+# Alembic Migrations for Textbook Generation Project
+
+This directory contains Alembic migration scripts for managing database schema changes, specifically configured for Neon PostgreSQL database.
+
+## Common Commands
+
+### Generate a new migration after changing models
+```bash
+# Make sure your DATABASE_URL is set in the .env file
+# For local development with SQLite:
+alembic revision --autogenerate -m "Description of changes"
+
+# For production with Neon:
+alembic revision --autogenerate -m "Description of changes"
+```
+
+### Apply migrations to the database
+```bash
+# For local development:
+alembic upgrade head
+
+# For production:
+alembic upgrade head
+```
+
+### Downgrade to a previous version
+```bash
+alembic downgrade -1  # Downgrade by one revision
+# or
+alembic downgrade <revision_id>  # Downgrade to specific revision
+```
+
+### Check current migration status
+```bash
+alembic current
+```
+
+### Create an empty migration (for non-model changes)
+```bash
+alembic revision -m "Description of changes"
+```
+
+## Configuration Notes
+
+- The `env.py` file is configured to read the database URL from the `DATABASE_URL` environment variable
+- Models are imported from `src.models` to ensure Alembic detects schema changes
+- For Neon database integration, make sure your connection string in `.env` follows this format:
+  `postgresql://username:password@ep-xxx.us-east-1.aws.neon.tech/dbname?sslmode=require`

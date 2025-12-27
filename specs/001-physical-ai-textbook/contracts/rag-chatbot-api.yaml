@@ -1,0 +1,233 @@
+# API Contract: RAG Chatbot Service
+
+## Overview
+This document defines the API contract for the RAG (Retrieval-Augmented Generation) chatbot service that answers questions based only on textbook content.
+
+## Base URL
+```
+https://api.example.com/v1
+```
+
+## Endpoints
+
+### 1. Submit Question to RAG Chatbot
+
+**POST** `/chat/query`
+
+Submit a question to the RAG chatbot for a response based on textbook content.
+
+#### Request
+
+**Headers:**
+```
+Content-Type: application/json
+Authorization: Bearer {user_token}
+```
+
+**Body:**
+```json
+{
+  "question": "string (required) - The user's question, 5-500 characters",
+  "context": "string (optional) - Additional context for the question",
+  "chapter_id": "string (optional) - Specific chapter to search within",
+  "include_citations": "boolean (optional) - Whether to include source citations (default: true)"
+}
+```
+
+#### Response
+
+**Success (200):**
+```json
+{
+  "id": "string - Unique ID for this query response",
+  "question": "string - The original question",
+  "answer": "string - The RAG-generated answer",
+  "sources": [
+    {
+      "chapter_id": "string - ID of the source chapter",
+      "chapter_title": "string - Title of the source chapter",
+      "page_reference": "string - Page or section reference",
+      "relevance_score": "number - Relevance score 0-1"
+    }
+  ],
+  "confidence_score": "number - Confidence score 0-1",
+  "timestamp": "string - ISO 8601 timestamp",
+  "is_fully_answered": "boolean - Whether the question was fully answered from textbook content"
+}
+```
+
+**Validation Errors (400):**
+```json
+{
+  "error": "string - Error message",
+  "details": {
+    "question": ["Question must be between 5-500 characters"]
+  }
+}
+```
+
+**Unauthorized (401):**
+```json
+{
+  "error": "string - Error message",
+  "code": "UNAUTHORIZED"
+}
+```
+
+**Not Found in Textbook (204):**
+```json
+{
+  "message": "string - Explanation that question cannot be answered from textbook content",
+  "suggestion": "string - Suggestion for user",
+  "available_topics": ["string"] - List of related topics in the textbook
+}
+```
+
+#### Example Request:
+```json
+{
+  "question": "How does ROS 2 handle communication between nodes?",
+  "context": "I'm learning about robotic middleware systems",
+  "include_citations": true
+}
+```
+
+#### Example Response:
+```json
+{
+  "id": "qry_1234567890",
+  "question": "How does ROS 2 handle communication between nodes?",
+  "answer": "ROS 2 uses a publish-subscribe model for node communication. Nodes publish messages to topics, and other nodes subscribe to these topics to receive messages. It also supports services for request-response communication and actions for goal-oriented communication with feedback.",
+  "sources": [
+    {
+      "chapter_id": "ch_001",
+      "chapter_title": "The Robotic Nervous System (ROS 2)",
+      "page_reference": "Module 1, Section 3.2",
+      "relevance_score": 0.95
+    }
+  ],
+  "confidence_score": 0.92,
+  "timestamp": "2025-12-13T10:30:00Z",
+  "is_fully_answered": true
+}
+```
+
+### 2. Get Chat History
+
+**GET** `/chat/history`
+
+Retrieve the user's chat history with the RAG chatbot.
+
+#### Request
+
+**Headers:**
+```
+Authorization: Bearer {user_token}
+```
+
+**Query Parameters:**
+- `limit`: number (optional, default: 20) - Number of items to return (max: 100)
+- `offset`: number (optional, default: 0) - Number of items to skip
+- `from_date`: string (optional) - ISO 8601 date to filter from
+
+#### Response
+
+**Success (200):**
+```json
+{
+  "queries": [
+    {
+      "id": "string",
+      "question": "string",
+      "answer": "string",
+      "timestamp": "string - ISO 8601 timestamp",
+      "sources": [
+        {
+          "chapter_id": "string",
+          "chapter_title": "string",
+          "page_reference": "string",
+          "relevance_score": "number"
+        }
+      ],
+      "confidence_score": "number"
+    }
+  ],
+  "total_count": "number",
+  "limit": "number",
+  "offset": "number"
+}
+```
+
+### 3. Content Validation Check
+
+**POST** `/chat/validate-content`
+
+Validate whether a question can be answered from textbook content before full processing.
+
+#### Request
+
+**Headers:**
+```
+Content-Type: application/json
+Authorization: Bearer {user_token}
+```
+
+**Body:**
+```json
+{
+  "question": "string (required) - The user's question"
+}
+```
+
+#### Response
+
+**Success (200):**
+```json
+{
+  "question": "string - The original question",
+  "can_answer": "boolean - Whether question can be answered from textbook",
+  "relevant_chapters": [
+    {
+      "chapter_id": "string",
+      "chapter_title": "string",
+      "relevance_score": "number - 0-1 score"
+    }
+  ],
+  "confidence_in_relevance": "number - 0-1 score"
+}
+```
+
+## Error Handling
+
+All API errors follow the same structure:
+
+```json
+{
+  "error": "string - Human-readable error message",
+  "code": "string - Error code (e.g., INVALID_INPUT, UNAUTHORIZED, CONTENT_NOT_FOUND)",
+  "timestamp": "string - ISO 8601 timestamp",
+  "request_id": "string - Unique identifier for the request for debugging"
+}
+```
+
+## Rate Limiting
+
+- Authenticated users: 100 requests per hour
+- Unauthenticated users: 10 requests per hour
+- Headers will include: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset
+
+## Authentication
+
+All endpoints require a valid authentication token in the Authorization header. Tokens are obtained through the authentication service.
+
+## Content Grounding Requirements
+
+All chatbot responses must:
+1. Only use information from the textbook content
+2. Include proper citations to source chapters
+3. Indicate when content is not available in the textbook
+4. Not generate hallucinated information
+
+## Versioning
+
+This contract follows the API version in the URL path (v1). Breaking changes will increment the version number.

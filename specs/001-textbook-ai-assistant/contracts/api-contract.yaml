@@ -1,0 +1,198 @@
+# API Contract: Textbook AI Assistant Service
+
+## Overview
+This document defines the API contracts for the Textbook AI Assistant service for the Physical AI & Humanoid Robotics textbook. The service enables users to ask questions about textbook content and receive accurate answers based solely on the information provided in the book, with proper citations.
+
+## Base URL
+`/api/v1`
+
+## Authentication
+All endpoints require authentication via Better-Auth tokens in the Authorization header.
+
+## Endpoints
+
+### 1. Process User Question
+`POST /ask`
+
+Process a user question and return a response based on textbook content with citations.
+
+#### Request
+```json
+{
+  "question": "Explain embodied cognition principles?",
+  "book_id": "physical-ai-humanoid-textbook",
+  "session_id": "session-456",
+  "selected_text": "Optional selected text from the textbook"
+}
+```
+
+#### Request Parameters
+- `question` (string, required): The user's question about the textbook content
+- `book_id` (string, required): The ID of the textbook being queried
+- `session_id` (string, required): The ID of the user session
+- `selected_text` (string, optional): Text selected by the user, if any
+
+#### Response (Success)
+**Status Code**: 200 OK
+```json
+{
+  "response": "Embodied cognition is a theory that... (detailed explanation)",
+  "citations": [
+    {
+      "chapter": "Chapter 3",
+      "section": "3.2 Embodied Cognition Principles",
+      "page": 45
+    }
+  ],
+  "session_id": "session-456",
+  "response_id": "resp-789",
+  "grounding_status": "Valid"
+}
+```
+
+#### Response (Content Not Found)
+**Status Code**: 200 OK
+```json
+{
+  "response": "This information is not available in the textbook.",
+  "citations": [],
+  "session_id": "session-456",
+  "response_id": "resp-790",
+  "grounding_status": "Not Found"
+}
+```
+
+#### Response (Validation Error)
+**Status Code**: 422 Unprocessable Entity
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "question"],
+      "msg": "Field required",
+      "type": "value_error.missing"
+    }
+  ]
+}
+```
+
+### 2. Get Citations for Content
+`GET /citations`
+
+Retrieve citation information for textbook content.
+
+#### Request Parameters
+- `content_id` (string): The ID of the content to get citations for
+- `book_id` (string): The ID of the textbook
+
+#### Response (Success)
+**Status Code**: 200 OK
+```json
+{
+  "citations": [
+    {
+      "content_id": "content-abc",
+      "chapter": "Chapter 3",
+      "section": "3.2 Embodied Cognition Principles",
+      "page": 45,
+      "citation_format": "Chapter 3 - Embodied Cognition Principles"
+    }
+  ]
+}
+```
+
+### 3. Validate Response Grounding
+`POST /validate`
+
+Validate if a response is properly grounded in textbook content.
+
+#### Request
+```json
+{
+  "response_text": "Embodied cognition is a theory that...",
+  "context_chunks": [
+    {
+      "text": "Embodied cognition theory states that...",
+      "chapter": "Chapter 3",
+      "section": "3.2"
+    }
+  ]
+}
+```
+
+#### Request Parameters
+- `response_text` (string, required): The response text to validate
+- `context_chunks` (array, required): The context chunks used to generate the response
+
+#### Response (Valid)
+**Status Code**: 200 OK
+```json
+{
+  "is_valid": true,
+  "confidence": 0.92,
+  "message": "Response is properly grounded in textbook content"
+}
+```
+
+#### Response (Invalid)
+**Status Code**: 200 OK
+```json
+{
+  "is_valid": false,
+  "confidence": 0.15,
+  "message": "Response contains information not found in the provided context"
+}
+```
+
+## Common Error Responses
+
+### 401 Unauthorized
+```json
+{
+  "detail": "Authentication required"
+}
+```
+
+### 404 Not Found
+```json
+{
+  "detail": "Book or content not found"
+}
+```
+
+### 429 Too Many Requests
+```json
+{
+  "detail": "Rate limit exceeded. Please try again later."
+}
+```
+
+### 500 Internal Server Error
+```json
+{
+  "detail": "An unexpected error occurred"
+}
+```
+
+## Data Models
+
+### AIResponse
+- `response` (string): The AI assistant's response to the user's question
+- `citations` (array): List of citations for the response
+- `session_id` (string): The ID of the user session
+- `response_id` (string): The ID of the generated response
+- `grounding_status` (string): Status of response grounding ("Valid", "Not Found", "External")
+
+### Citation
+- `chapter` (string): The chapter reference
+- `section` (string): The section reference
+- `page` (number): The page number reference
+
+### ValidationRequest
+- `response_text` (string): The response text to validate
+- `context_chunks` (array): The context chunks used to generate the response
+
+### ValidationResponse
+- `is_valid` (boolean): Whether the response is properly grounded
+- `confidence` (number): Confidence level of the validation (0.0-1.0)
+- `message` (string): Explanation of the validation result

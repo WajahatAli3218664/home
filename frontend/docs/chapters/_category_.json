@@ -1,0 +1,8 @@
+{
+  "label": "Textbook Chapters",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Complete textbook on Physical AI & Humanoid Robotics"
+  }
+}

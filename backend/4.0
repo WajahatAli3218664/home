@@ -1,0 +1,868 @@
+Collecting fastapi==0.115.4
+  Using cached fastapi-0.115.4-py3-none-any.whl.metadata (27 kB)
+Collecting uvicorn==0.32.1 (from uvicorn[standard]==0.32.1)
+  Using cached uvicorn-0.32.1-py3-none-any.whl.metadata (6.6 kB)
+Collecting python-multipart==0.0.20
+  Using cached python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+Collecting python-jose==3.3.0 (from python-jose[cryptography]==3.3.0)
+  Using cached python_jose-3.3.0-py2.py3-none-any.whl.metadata (5.4 kB)
+Collecting passlib==1.7.4 (from passlib[bcrypt]==1.7.4)
+  Using cached passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting pydantic-settings==2.7.0
+  Using cached pydantic_settings-2.7.0-py3-none-any.whl.metadata (3.5 kB)
+Collecting qdrant-client
+  Using cached qdrant_client-1.16.2-py3-none-any.whl.metadata (11 kB)
+Collecting beautifulsoup4
+  Using cached beautifulsoup4-4.14.3-py3-none-any.whl.metadata (3.8 kB)
+Collecting requests
+  Using cached requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting python-dotenv
+  Using cached python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+Collecting pytest
+  Using cached pytest-9.0.2-py3-none-any.whl.metadata (7.6 kB)
+Collecting openai
+  Using cached openai-2.14.0-py3-none-any.whl.metadata (29 kB)
+Collecting langchain
+  Using cached langchain-1.2.0-py3-none-any.whl.metadata (4.9 kB)
+Collecting langchain-openai
+  Using cached langchain_openai-1.1.6-py3-none-any.whl.metadata (2.6 kB)
+Collecting google-generativeai
+  Using cached google_generativeai-0.8.6-py3-none-any.whl.metadata (3.9 kB)
+Collecting mangum
+  Using cached mangum-0.19.0-py3-none-any.whl.metadata (3.6 kB)
+Collecting sentence-transformers
+  Using cached sentence_transformers-5.2.0-py3-none-any.whl.metadata (16 kB)
+Collecting torch
+  Using cached torch-2.9.1-cp314-cp314-win_amd64.whl.metadata (30 kB)
+Collecting transformers
+  Using cached transformers-4.57.3-py3-none-any.whl.metadata (43 kB)
+Collecting scikit-learn
+  Using cached scikit_learn-1.8.0-cp314-cp314-win_amd64.whl.metadata (11 kB)
+Collecting groq
+  Using cached groq-1.0.0-py3-none-any.whl.metadata (16 kB)
+Collecting cohere
+  Downloading cohere-5.20.1-py3-none-any.whl.metadata (3.5 kB)
+Collecting sqlmodel==0.0.22
+  Using cached sqlmodel-0.0.22-py3-none-any.whl.metadata (10 kB)
+Collecting starlette<0.42.0,>=0.40.0 (from fastapi==0.115.4)
+  Using cached starlette-0.41.3-py3-none-any.whl.metadata (6.0 kB)
+Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi==0.115.4)
+  Using cached pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi==0.115.4)
+  Using cached typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting click>=7.0 (from uvicorn==0.32.1->uvicorn[standard]==0.32.1)
+  Using cached click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting h11>=0.8 (from uvicorn==0.32.1->uvicorn[standard]==0.32.1)
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting ecdsa!=0.15 (from python-jose==3.3.0->python-jose[cryptography]==3.3.0)
+  Using cached ecdsa-0.19.1-py2.py3-none-any.whl.metadata (29 kB)
+Collecting rsa (from python-jose==3.3.0->python-jose[cryptography]==3.3.0)
+  Using cached rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting pyasn1 (from python-jose==3.3.0->python-jose[cryptography]==3.3.0)
+  Using cached pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+Collecting SQLAlchemy<2.1.0,>=2.0.14 (from sqlmodel==0.0.22)
+  Using cached sqlalchemy-2.0.45-cp314-cp314-win_amd64.whl.metadata (9.8 kB)
+Collecting bcrypt>=3.1.0 (from passlib[bcrypt]==1.7.4)
+  Using cached bcrypt-5.0.0-cp39-abi3-win_amd64.whl.metadata (10 kB)
+Collecting cryptography>=3.4.0 (from python-jose[cryptography]==3.3.0)
+  Using cached cryptography-46.0.3-cp311-abi3-win_amd64.whl.metadata (5.7 kB)
+Collecting colorama>=0.4 (from uvicorn[standard]==0.32.1)
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting httptools>=0.6.3 (from uvicorn[standard]==0.32.1)
+  Using cached httptools-0.7.1-cp314-cp314-win_amd64.whl.metadata (3.6 kB)
+Collecting pyyaml>=5.1 (from uvicorn[standard]==0.32.1)
+  Using cached pyyaml-6.0.3-cp314-cp314-win_amd64.whl.metadata (2.4 kB)
+Collecting watchfiles>=0.13 (from uvicorn[standard]==0.32.1)
+  Using cached watchfiles-1.1.1-cp314-cp314-win_amd64.whl.metadata (5.0 kB)
+Collecting websockets>=10.4 (from uvicorn[standard]==0.32.1)
+  Using cached websockets-15.0.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting annotated-types>=0.6.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.4)
+  Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.41.5 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.4)
+  Using cached pydantic_core-2.41.5-cp314-cp314-win_amd64.whl.metadata (7.4 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.4)
+  Using cached typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting greenlet>=1 (from SQLAlchemy<2.1.0,>=2.0.14->sqlmodel==0.0.22)
+  Using cached greenlet-3.3.0-cp314-cp314-win_amd64.whl.metadata (4.2 kB)
+Collecting anyio<5,>=3.4.0 (from starlette<0.42.0,>=0.40.0->fastapi==0.115.4)
+  Using cached anyio-4.12.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting idna>=2.8 (from anyio<5,>=3.4.0->starlette<0.42.0,>=0.40.0->fastapi==0.115.4)
+  Using cached idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting grpcio>=1.41.0 (from qdrant-client)
+  Using cached grpcio-1.76.0-cp314-cp314-win_amd64.whl.metadata (3.8 kB)
+Collecting httpx>=0.20.0 (from httpx[http2]>=0.20.0->qdrant-client)
+  Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting numpy>=2.3.0 (from qdrant-client)
+  Downloading numpy-2.4.0-cp314-cp314-win_amd64.whl.metadata (6.6 kB)
+Collecting portalocker<4.0,>=2.7.0 (from qdrant-client)
+  Using cached portalocker-3.2.0-py3-none-any.whl.metadata (8.7 kB)
+Collecting protobuf>=3.20.0 (from qdrant-client)
+  Using cached protobuf-6.33.2-cp310-abi3-win_amd64.whl.metadata (593 bytes)
+Collecting urllib3<3,>=1.26.14 (from qdrant-client)
+  Using cached urllib3-2.6.2-py3-none-any.whl.metadata (6.6 kB)
+Collecting pywin32>=226 (from portalocker<4.0,>=2.7.0->qdrant-client)
+  Using cached pywin32-311-cp314-cp314-win_amd64.whl.metadata (10 kB)
+Collecting soupsieve>=1.6.1 (from beautifulsoup4)
+  Downloading soupsieve-2.8.1-py3-none-any.whl.metadata (4.6 kB)
+Collecting charset_normalizer<4,>=2 (from requests)
+  Using cached charset_normalizer-3.4.4-cp314-cp314-win_amd64.whl.metadata (38 kB)
+Collecting certifi>=2017.4.17 (from requests)
+  Using cached certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+Collecting iniconfig>=1.0.1 (from pytest)
+  Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting packaging>=22 (from pytest)
+  Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pluggy<2,>=1.5 (from pytest)
+  Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting pygments>=2.7.2 (from pytest)
+  Using cached pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+Collecting distro<2,>=1.7.0 (from openai)
+  Using cached distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting jiter<1,>=0.10.0 (from openai)
+  Using cached jiter-0.12.0-cp314-cp314-win_amd64.whl.metadata (5.3 kB)
+Collecting sniffio (from openai)
+  Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting tqdm>4 (from openai)
+  Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Collecting httpcore==1.* (from httpx>=0.20.0->httpx[http2]>=0.20.0->qdrant-client)
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting langchain-core<2.0.0,>=1.2.1 (from langchain)
+  Downloading langchain_core-1.2.5-py3-none-any.whl.metadata (3.7 kB)
+Collecting langgraph<1.1.0,>=1.0.2 (from langchain)
+  Using cached langgraph-1.0.5-py3-none-any.whl.metadata (7.4 kB)
+Collecting jsonpatch<2.0.0,>=1.33.0 (from langchain-core<2.0.0,>=1.2.1->langchain)
+  Using cached jsonpatch-1.33-py2.py3-none-any.whl.metadata (3.0 kB)
+Collecting langsmith<1.0.0,>=0.3.45 (from langchain-core<2.0.0,>=1.2.1->langchain)
+  Downloading langsmith-0.5.1-py3-none-any.whl.metadata (15 kB)
+Collecting tenacity!=8.4.0,<10.0.0,>=8.1.0 (from langchain-core<2.0.0,>=1.2.1->langchain)
+  Using cached tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting uuid-utils<1.0,>=0.12.0 (from langchain-core<2.0.0,>=1.2.1->langchain)
+  Using cached uuid_utils-0.12.0-cp39-abi3-win_amd64.whl.metadata (1.1 kB)
+Collecting jsonpointer>=1.9 (from jsonpatch<2.0.0,>=1.33.0->langchain-core<2.0.0,>=1.2.1->langchain)
+  Using cached jsonpointer-3.0.0-py2.py3-none-any.whl.metadata (2.3 kB)
+Collecting langgraph-checkpoint<4.0.0,>=2.1.0 (from langgraph<1.1.0,>=1.0.2->langchain)
+  Using cached langgraph_checkpoint-3.0.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting langgraph-prebuilt<1.1.0,>=1.0.2 (from langgraph<1.1.0,>=1.0.2->langchain)
+  Using cached langgraph_prebuilt-1.0.5-py3-none-any.whl.metadata (5.2 kB)
+Collecting langgraph-sdk<0.4.0,>=0.3.0 (from langgraph<1.1.0,>=1.0.2->langchain)
+  Using cached langgraph_sdk-0.3.1-py3-none-any.whl.metadata (1.6 kB)
+Collecting xxhash>=3.5.0 (from langgraph<1.1.0,>=1.0.2->langchain)
+  Using cached xxhash-3.6.0-cp314-cp314-win_amd64.whl.metadata (13 kB)
+Collecting ormsgpack>=1.12.0 (from langgraph-checkpoint<4.0.0,>=2.1.0->langgraph<1.1.0,>=1.0.2->langchain)
+  Using cached ormsgpack-1.12.1-cp314-cp314-win_amd64.whl.metadata (3.3 kB)
+Collecting orjson>=3.10.1 (from langgraph-sdk<0.4.0,>=0.3.0->langgraph<1.1.0,>=1.0.2->langchain)
+  Using cached orjson-3.11.5-cp314-cp314-win_amd64.whl.metadata (42 kB)
+Collecting requests-toolbelt>=1.0.0 (from langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.1->langchain)
+  Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+Collecting zstandard>=0.23.0 (from langsmith<1.0.0,>=0.3.45->langchain-core<2.0.0,>=1.2.1->langchain)
+  Using cached zstandard-0.25.0-cp314-cp314-win_amd64.whl.metadata (3.3 kB)
+Collecting tiktoken<1.0.0,>=0.7.0 (from langchain-openai)
+  Using cached tiktoken-0.12.0-cp314-cp314-win_amd64.whl.metadata (6.9 kB)
+Collecting regex>=2022.1.18 (from tiktoken<1.0.0,>=0.7.0->langchain-openai)
+  Using cached regex-2025.11.3-cp314-cp314-win_amd64.whl.metadata (41 kB)
+Collecting google-ai-generativelanguage==0.6.15 (from google-generativeai)
+  Using cached google_ai_generativelanguage-0.6.15-py3-none-any.whl.metadata (5.7 kB)
+Collecting google-api-core (from google-generativeai)
+  Using cached google_api_core-2.28.1-py3-none-any.whl.metadata (3.3 kB)
+Collecting google-api-python-client (from google-generativeai)
+  Using cached google_api_python_client-2.187.0-py3-none-any.whl.metadata (7.0 kB)
+Collecting google-auth>=2.15.0 (from google-generativeai)
+  Using cached google_auth-2.45.0-py2.py3-none-any.whl.metadata (6.8 kB)
+Collecting proto-plus<2.0.0dev,>=1.22.3 (from google-ai-generativelanguage==0.6.15->google-generativeai)
+  Using cached proto_plus-1.27.0-py3-none-any.whl.metadata (2.2 kB)
+Collecting protobuf>=3.20.0 (from qdrant-client)
+  Using cached protobuf-5.29.5-cp310-abi3-win_amd64.whl.metadata (592 bytes)
+Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core->google-generativeai)
+  Using cached googleapis_common_protos-1.72.0-py3-none-any.whl.metadata (9.4 kB)
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai)
+  Using cached grpcio_status-1.76.0-py3-none-any.whl.metadata (1.1 kB)
+Collecting cachetools<7.0,>=2.0.0 (from google-auth>=2.15.0->google-generativeai)
+  Using cached cachetools-6.2.4-py3-none-any.whl.metadata (5.6 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth>=2.15.0->google-generativeai)
+  Using cached pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+INFO: pip is looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai)
+  Using cached grpcio_status-1.75.1-py3-none-any.whl.metadata (1.1 kB)
+Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core->google-generativeai)
+  Using cached googleapis_common_protos-1.71.0-py3-none-any.whl.metadata (9.4 kB)
+  Using cached googleapis_common_protos-1.70.0-py3-none-any.whl.metadata (9.3 kB)
+  Using cached googleapis_common_protos-1.69.2-py3-none-any.whl.metadata (9.3 kB)
+INFO: pip is still looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+  Using cached googleapis_common_protos-1.69.1-py2.py3-none-any.whl.metadata (9.3 kB)
+  Using cached googleapis_common_protos-1.69.0-py2.py3-none-any.whl.metadata (5.1 kB)
+  Using cached googleapis_common_protos-1.68.0-py2.py3-none-any.whl.metadata (5.1 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+  Using cached googleapis_common_protos-1.67.0-py2.py3-none-any.whl.metadata (5.1 kB)
+  Using cached googleapis_common_protos-1.66.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.65.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.64.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.63.2-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.63.1-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.63.0-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting protobuf>=3.20.0 (from qdrant-client)
+  Using cached protobuf-4.25.8-cp310-abi3-win_amd64.whl.metadata (541 bytes)
+Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core->google-generativeai)
+  Using cached googleapis_common_protos-1.62.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.61.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.60.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.59.1-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.59.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.58.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.57.1-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.57.0-py2.py3-none-any.whl.metadata (1.5 kB)
+  Using cached googleapis_common_protos-1.56.4-py2.py3-none-any.whl.metadata (1.3 kB)
+  Using cached googleapis_common_protos-1.56.3-py2.py3-none-any.whl.metadata (1.3 kB)
+  Using cached googleapis_common_protos-1.56.2-py2.py3-none-any.whl.metadata (1.3 kB)
+Collecting protobuf>=3.20.0 (from qdrant-client)
+  Using cached protobuf-3.20.3-py2.py3-none-any.whl.metadata (720 bytes)
+Collecting google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1 (from google-ai-generativelanguage==0.6.15->google-generativeai)
+  Using cached google_api_core-2.28.0-py3-none-any.whl.metadata (3.2 kB)
+  Using cached google_api_core-2.27.0-py3-none-any.whl.metadata (3.2 kB)
+  Using cached google_api_core-2.26.0-py3-none-any.whl.metadata (3.2 kB)
+  Using cached google_api_core-2.25.2-py3-none-any.whl.metadata (3.0 kB)
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai)
+  Using cached grpcio_status-1.75.0-py3-none-any.whl.metadata (1.1 kB)
+  Using cached grpcio_status-1.74.0-py3-none-any.whl.metadata (1.1 kB)
+  Using cached grpcio_status-1.73.1-py3-none-any.whl.metadata (1.1 kB)
+  Using cached grpcio_status-1.73.0-py3-none-any.whl.metadata (1.1 kB)
+  Using cached grpcio_status-1.72.2-py3-none-any.whl.metadata (1.1 kB)
+  Using cached grpcio_status-1.72.1-py3-none-any.whl.metadata (1.1 kB)
+  Using cached grpcio_status-1.71.2-py3-none-any.whl.metadata (1.1 kB)
+Collecting scipy (from sentence-transformers)
+  Using cached scipy-1.16.3-cp314-cp314-win_amd64.whl.metadata (60 kB)
+Collecting huggingface-hub>=0.20.0 (from sentence-transformers)
+  Using cached huggingface_hub-1.2.3-py3-none-any.whl.metadata (13 kB)
+Collecting filelock (from transformers)
+  Downloading filelock-3.20.1-py3-none-any.whl.metadata (2.1 kB)
+Collecting huggingface-hub>=0.20.0 (from sentence-transformers)
+  Using cached huggingface_hub-0.36.0-py3-none-any.whl.metadata (14 kB)
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers)
+  Using cached tokenizers-0.22.1-cp39-abi3-win_amd64.whl.metadata (6.9 kB)
+Collecting safetensors>=0.4.3 (from transformers)
+  Using cached safetensors-0.7.0-cp38-abi3-win_amd64.whl.metadata (4.2 kB)
+Collecting fsspec>=2023.5.0 (from huggingface-hub>=0.20.0->sentence-transformers)
+  Using cached fsspec-2025.12.0-py3-none-any.whl.metadata (10 kB)
+Collecting sympy>=1.13.3 (from torch)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting networkx>=2.5.1 (from torch)
+  Using cached networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting jinja2 (from torch)
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting setuptools (from torch)
+  Using cached setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting joblib>=1.3.0 (from scikit-learn)
+  Using cached joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting threadpoolctl>=3.2.0 (from scikit-learn)
+  Using cached threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Collecting fastavro<2.0.0,>=1.9.4 (from cohere)
+  Using cached fastavro-1.12.1-cp314-cp314-win_amd64.whl.metadata (5.9 kB)
+Collecting types-requests<3.0.0,>=2.0.0 (from cohere)
+  Using cached types_requests-2.32.4.20250913-py3-none-any.whl.metadata (2.0 kB)
+Collecting cffi>=2.0.0 (from cryptography>=3.4.0->python-jose[cryptography]==3.3.0)
+  Using cached cffi-2.0.0-cp314-cp314-win_amd64.whl.metadata (2.6 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography>=3.4.0->python-jose[cryptography]==3.3.0)
+  Using cached pycparser-2.23-py3-none-any.whl.metadata (993 bytes)
+Collecting six>=1.9.0 (from ecdsa!=0.15->python-jose==3.3.0->python-jose[cryptography]==3.3.0)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting h2<5,>=3 (from httpx[http2]>=0.20.0->qdrant-client)
+  Using cached h2-4.3.0-py3-none-any.whl.metadata (5.1 kB)
+Collecting hyperframe<7,>=6.1 (from h2<5,>=3->httpx[http2]>=0.20.0->qdrant-client)
+  Using cached hyperframe-6.1.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting hpack<5,>=4.1 (from h2<5,>=3->httpx[http2]>=0.20.0->qdrant-client)
+  Using cached hpack-4.1.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch)
+  Using cached mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting httplib2<1.0.0,>=0.19.0 (from google-api-python-client->google-generativeai)
+  Using cached httplib2-0.31.0-py3-none-any.whl.metadata (2.2 kB)
+Collecting google-auth-httplib2<1.0.0,>=0.2.0 (from google-api-python-client->google-generativeai)
+  Using cached google_auth_httplib2-0.3.0-py3-none-any.whl.metadata (3.1 kB)
+Collecting uritemplate<5,>=3.0.1 (from google-api-python-client->google-generativeai)
+  Using cached uritemplate-4.2.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting pyparsing<4,>=3.0.4 (from httplib2<1.0.0,>=0.19.0->google-api-python-client->google-generativeai)
+  Downloading pyparsing-3.3.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch)
+  Using cached markupsafe-3.0.3-cp314-cp314-win_amd64.whl.metadata (2.8 kB)
+Using cached fastapi-0.115.4-py3-none-any.whl (94 kB)
+Using cached uvicorn-0.32.1-py3-none-any.whl (63 kB)
+Using cached python_multipart-0.0.20-py3-none-any.whl (24 kB)
+Downloading python_jose-3.3.0-py2.py3-none-any.whl (33 kB)
+Using cached passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+Using cached pydantic_settings-2.7.0-py3-none-any.whl (29 kB)
+Using cached sqlmodel-0.0.22-py3-none-any.whl (28 kB)
+Using cached pydantic-2.12.5-py3-none-any.whl (463 kB)
+Using cached pydantic_core-2.41.5-cp314-cp314-win_amd64.whl (2.0 MB)
+Using cached sqlalchemy-2.0.45-cp314-cp314-win_amd64.whl (2.1 MB)
+Using cached starlette-0.41.3-py3-none-any.whl (73 kB)
+Using cached anyio-4.12.0-py3-none-any.whl (113 kB)
+Using cached qdrant_client-1.16.2-py3-none-any.whl (377 kB)
+Using cached portalocker-3.2.0-py3-none-any.whl (22 kB)
+Using cached urllib3-2.6.2-py3-none-any.whl (131 kB)
+Using cached beautifulsoup4-4.14.3-py3-none-any.whl (107 kB)
+Using cached requests-2.32.5-py3-none-any.whl (64 kB)
+Using cached charset_normalizer-3.4.4-cp314-cp314-win_amd64.whl (107 kB)
+Using cached idna-3.11-py3-none-any.whl (71 kB)
+Using cached python_dotenv-1.2.1-py3-none-any.whl (21 kB)
+Using cached pytest-9.0.2-py3-none-any.whl (374 kB)
+Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+Using cached openai-2.14.0-py3-none-any.whl (1.1 MB)
+Using cached distro-1.9.0-py3-none-any.whl (20 kB)
+Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Using cached jiter-0.12.0-cp314-cp314-win_amd64.whl (204 kB)
+Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Using cached langchain-1.2.0-py3-none-any.whl (102 kB)
+Downloading langchain_core-1.2.5-py3-none-any.whl (484 kB)
+Using cached jsonpatch-1.33-py2.py3-none-any.whl (12 kB)
+Using cached langgraph-1.0.5-py3-none-any.whl (157 kB)
+Using cached langgraph_checkpoint-3.0.1-py3-none-any.whl (46 kB)
+Using cached langgraph_prebuilt-1.0.5-py3-none-any.whl (35 kB)
+Using cached langgraph_sdk-0.3.1-py3-none-any.whl (66 kB)
+Downloading langsmith-0.5.1-py3-none-any.whl (275 kB)
+Using cached packaging-25.0-py3-none-any.whl (66 kB)
+Using cached pyyaml-6.0.3-cp314-cp314-win_amd64.whl (156 kB)
+Using cached tenacity-9.1.2-py3-none-any.whl (28 kB)
+Using cached uuid_utils-0.12.0-cp39-abi3-win_amd64.whl (183 kB)
+Using cached langchain_openai-1.1.6-py3-none-any.whl (84 kB)
+Using cached tiktoken-0.12.0-cp314-cp314-win_amd64.whl (921 kB)
+Using cached google_generativeai-0.8.6-py3-none-any.whl (155 kB)
+Using cached google_ai_generativelanguage-0.6.15-py3-none-any.whl (1.3 MB)
+Using cached google_api_core-2.25.2-py3-none-any.whl (162 kB)
+Using cached googleapis_common_protos-1.72.0-py3-none-any.whl (297 kB)
+Using cached grpcio_status-1.71.2-py3-none-any.whl (14 kB)
+Using cached protobuf-5.29.5-cp310-abi3-win_amd64.whl (434 kB)
+Using cached google_auth-2.45.0-py2.py3-none-any.whl (233 kB)
+Using cached cachetools-6.2.4-py3-none-any.whl (11 kB)
+Using cached grpcio-1.76.0-cp314-cp314-win_amd64.whl (4.8 MB)
+Using cached proto_plus-1.27.0-py3-none-any.whl (50 kB)
+Using cached rsa-4.9.1-py3-none-any.whl (34 kB)
+Using cached mangum-0.19.0-py3-none-any.whl (17 kB)
+Using cached sentence_transformers-5.2.0-py3-none-any.whl (493 kB)
+Using cached transformers-4.57.3-py3-none-any.whl (12.0 MB)
+Using cached huggingface_hub-0.36.0-py3-none-any.whl (566 kB)
+Using cached tokenizers-0.22.1-cp39-abi3-win_amd64.whl (2.7 MB)
+Using cached torch-2.9.1-cp314-cp314-win_amd64.whl (110.9 MB)
+Using cached scikit_learn-1.8.0-cp314-cp314-win_amd64.whl (8.1 MB)
+Using cached groq-1.0.0-py3-none-any.whl (138 kB)
+Downloading cohere-5.20.1-py3-none-any.whl (318 kB)
+Using cached fastavro-1.12.1-cp314-cp314-win_amd64.whl (452 kB)
+Using cached types_requests-2.32.4.20250913-py3-none-any.whl (20 kB)
+Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Using cached bcrypt-5.0.0-cp39-abi3-win_amd64.whl (150 kB)
+Using cached certifi-2025.11.12-py3-none-any.whl (159 kB)
+Using cached click-8.3.1-py3-none-any.whl (108 kB)
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Using cached cryptography-46.0.3-cp311-abi3-win_amd64.whl (3.5 MB)
+Using cached cffi-2.0.0-cp314-cp314-win_amd64.whl (185 kB)
+Using cached ecdsa-0.19.1-py2.py3-none-any.whl (150 kB)
+Using cached fsspec-2025.12.0-py3-none-any.whl (201 kB)
+Using cached greenlet-3.3.0-cp314-cp314-win_amd64.whl (305 kB)
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Using cached httptools-0.7.1-cp314-cp314-win_amd64.whl (88 kB)
+Using cached h2-4.3.0-py3-none-any.whl (61 kB)
+Using cached hpack-4.1.0-py3-none-any.whl (34 kB)
+Using cached hyperframe-6.1.0-py3-none-any.whl (13 kB)
+Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Using cached joblib-1.5.3-py3-none-any.whl (309 kB)
+Using cached jsonpointer-3.0.0-py2.py3-none-any.whl (7.6 kB)
+Using cached networkx-3.6.1-py3-none-any.whl (2.1 MB)
+Downloading numpy-2.4.0-cp314-cp314-win_amd64.whl (12.4 MB)
+   ---------------------------------------- 12.4/12.4 MB 1.9 MB/s  0:00:06
+Using cached orjson-3.11.5-cp314-cp314-win_amd64.whl (133 kB)
+Using cached ormsgpack-1.12.1-cp314-cp314-win_amd64.whl (116 kB)
+Using cached pyasn1-0.6.1-py3-none-any.whl (83 kB)
+Using cached pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+Using cached pygments-2.19.2-py3-none-any.whl (1.2 MB)
+Using cached pywin32-311-cp314-cp314-win_amd64.whl (9.7 MB)
+Using cached regex-2025.11.3-cp314-cp314-win_amd64.whl (280 kB)
+Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+Using cached safetensors-0.7.0-cp38-abi3-win_amd64.whl (341 kB)
+Using cached scipy-1.16.3-cp314-cp314-win_amd64.whl (39.4 MB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading soupsieve-2.8.1-py3-none-any.whl (36 kB)
+Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
+Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
+Using cached threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
+Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Using cached watchfiles-1.1.1-cp314-cp314-win_amd64.whl (287 kB)
+Using cached websockets-15.0.1-py3-none-any.whl (169 kB)
+Using cached xxhash-3.6.0-cp314-cp314-win_amd64.whl (32 kB)
+Using cached zstandard-0.25.0-cp314-cp314-win_amd64.whl (516 kB)
+Downloading filelock-3.20.1-py3-none-any.whl (16 kB)
+Using cached google_api_python_client-2.187.0-py3-none-any.whl (14.6 MB)
+Using cached google_auth_httplib2-0.3.0-py3-none-any.whl (9.5 kB)
+Using cached httplib2-0.31.0-py3-none-any.whl (91 kB)
+Downloading pyparsing-3.3.1-py3-none-any.whl (121 kB)
+Using cached uritemplate-4.2.0-py3-none-any.whl (11 kB)
+Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached markupsafe-3.0.3-cp314-cp314-win_amd64.whl (15 kB)
+Using cached pycparser-2.23-py3-none-any.whl (118 kB)
+Using cached setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+Installing collected packages: pywin32, passlib, mpmath, zstandard, xxhash, websockets, uuid-utils, urllib3, uritemplate, typing-extensions, threadpoolctl, tenacity, sympy, soupsieve, sniffio, six, setuptools, safetensors, regex, pyyaml, python-multipart, python-dotenv, pyparsing, pygments, pycparser, pyasn1, protobuf, portalocker, pluggy, packaging, ormsgpack, orjson, numpy, networkx, MarkupSafe, jsonpointer, joblib, jiter, iniconfig, idna, hyperframe, httptools, hpack, h11, greenlet, fsspec, filelock, fastavro, distro, colorama, charset_normalizer, certifi, cachetools, bcrypt, annotated-types, typing-inspection, types-requests, tqdm, SQLAlchemy, scipy, rsa, requests, pytest, pydantic-core, pyasn1-modules, proto-plus, mangum, jsonpatch, jinja2, httplib2, httpcore, h2, grpcio, googleapis-common-protos, ecdsa, click, cffi, beautifulsoup4, anyio, watchfiles, uvicorn, torch, tiktoken, starlette, scikit-learn, requests-toolbelt, python-jose, pydantic, huggingface-hub, httpx, grpcio-status, google-auth, cryptography, tokenizers, sqlmodel, pydantic-settings, openai, langsmith, langgraph-sdk, groq, google-auth-httplib2, google-api-core, fastapi, transformers, qdrant-client, langchain-core, google-api-python-client, cohere, sentence-transformers, langgraph-checkpoint, langchain-openai, google-ai-generativelanguage, langgraph-prebuilt, google-generativeai, langgraph, langchain
+  Attempting uninstall: pywin32
+    Found existing installation: pywin32 311
+    Uninstalling pywin32-311:
+      Successfully uninstalled pywin32-311
+  Attempting uninstall: passlib
+    Found existing installation: passlib 1.7.4
+    Uninstalling passlib-1.7.4:
+      Successfully uninstalled passlib-1.7.4
+  Attempting uninstall: mpmath
+    Found existing installation: mpmath 1.3.0
+    Uninstalling mpmath-1.3.0:
+      Successfully uninstalled mpmath-1.3.0
+  Attempting uninstall: zstandard
+    Found existing installation: zstandard 0.25.0
+    Uninstalling zstandard-0.25.0:
+      Successfully uninstalled zstandard-0.25.0
+  Attempting uninstall: xxhash
+    Found existing installation: xxhash 3.6.0
+    Uninstalling xxhash-3.6.0:
+      Successfully uninstalled xxhash-3.6.0
+  Attempting uninstall: websockets
+    Found existing installation: websockets 15.0.1
+    Uninstalling websockets-15.0.1:
+      Successfully uninstalled websockets-15.0.1
+  Attempting uninstall: uuid-utils
+    Found existing installation: uuid_utils 0.12.0
+    Uninstalling uuid_utils-0.12.0:
+      Successfully uninstalled uuid_utils-0.12.0
+  Attempting uninstall: urllib3
+    Found existing installation: urllib3 2.6.2
+    Uninstalling urllib3-2.6.2:
+      Successfully uninstalled urllib3-2.6.2
+  Attempting uninstall: uritemplate
+    Found existing installation: uritemplate 4.2.0
+    Uninstalling uritemplate-4.2.0:
+      Successfully uninstalled uritemplate-4.2.0
+  Attempting uninstall: typing-extensions
+    Found existing installation: typing_extensions 4.15.0
+    Uninstalling typing_extensions-4.15.0:
+      Successfully uninstalled typing_extensions-4.15.0
+  Attempting uninstall: threadpoolctl
+    Found existing installation: threadpoolctl 3.6.0
+    Uninstalling threadpoolctl-3.6.0:
+      Successfully uninstalled threadpoolctl-3.6.0
+  Attempting uninstall: tenacity
+    Found existing installation: tenacity 9.1.2
+    Uninstalling tenacity-9.1.2:
+      Successfully uninstalled tenacity-9.1.2
+  Attempting uninstall: sympy
+    Found existing installation: sympy 1.14.0
+    Uninstalling sympy-1.14.0:
+      Successfully uninstalled sympy-1.14.0
+  Attempting uninstall: soupsieve
+    Found existing installation: soupsieve 2.8
+    Uninstalling soupsieve-2.8:
+      Successfully uninstalled soupsieve-2.8
+  Attempting uninstall: sniffio
+    Found existing installation: sniffio 1.3.1
+    Uninstalling sniffio-1.3.1:
+      Successfully uninstalled sniffio-1.3.1
+  Attempting uninstall: six
+    Found existing installation: six 1.17.0
+    Uninstalling six-1.17.0:
+      Successfully uninstalled six-1.17.0
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 80.9.0
+    Uninstalling setuptools-80.9.0:
+      Successfully uninstalled setuptools-80.9.0
+  Attempting uninstall: safetensors
+    Found existing installation: safetensors 0.7.0
+    Uninstalling safetensors-0.7.0:
+      Successfully uninstalled safetensors-0.7.0
+  Attempting uninstall: regex
+    Found existing installation: regex 2025.11.3
+    Uninstalling regex-2025.11.3:
+      Successfully uninstalled regex-2025.11.3
+  Attempting uninstall: pyyaml
+    Found existing installation: PyYAML 6.0.3
+    Uninstalling PyYAML-6.0.3:
+      Successfully uninstalled PyYAML-6.0.3
+  Attempting uninstall: python-multipart
+    Found existing installation: python-multipart 0.0.6
+    Uninstalling python-multipart-0.0.6:
+      Successfully uninstalled python-multipart-0.0.6
+  Attempting uninstall: python-dotenv
+    Found existing installation: python-dotenv 1.0.0
+    Uninstalling python-dotenv-1.0.0:
+      Successfully uninstalled python-dotenv-1.0.0
+  Attempting uninstall: pyparsing
+    Found existing installation: pyparsing 3.3.0
+    Uninstalling pyparsing-3.3.0:
+      Successfully uninstalled pyparsing-3.3.0
+  Attempting uninstall: pygments
+    Found existing installation: Pygments 2.19.2
+    Uninstalling Pygments-2.19.2:
+      Successfully uninstalled Pygments-2.19.2
+  Attempting uninstall: pycparser
+    Found existing installation: pycparser 2.23
+    Uninstalling pycparser-2.23:
+      Successfully uninstalled pycparser-2.23
+  Attempting uninstall: pyasn1
+    Found existing installation: pyasn1 0.6.1
+    Uninstalling pyasn1-0.6.1:
+      Successfully uninstalled pyasn1-0.6.1
+  Attempting uninstall: protobuf
+    Found existing installation: protobuf 5.29.5
+    Uninstalling protobuf-5.29.5:
+      Successfully uninstalled protobuf-5.29.5
+  Attempting uninstall: portalocker
+    Found existing installation: portalocker 2.10.1
+    Uninstalling portalocker-2.10.1:
+      Successfully uninstalled portalocker-2.10.1
+  Attempting uninstall: pluggy
+    Found existing installation: pluggy 1.6.0
+    Uninstalling pluggy-1.6.0:
+      Successfully uninstalled pluggy-1.6.0
+  Attempting uninstall: packaging
+    Found existing installation: packaging 25.0
+    Uninstalling packaging-25.0:
+      Successfully uninstalled packaging-25.0
+  Attempting uninstall: ormsgpack
+    Found existing installation: ormsgpack 1.12.1
+    Uninstalling ormsgpack-1.12.1:
+      Successfully uninstalled ormsgpack-1.12.1
+  Attempting uninstall: orjson
+    Found existing installation: orjson 3.11.5
+    Uninstalling orjson-3.11.5:
+      Successfully uninstalled orjson-3.11.5
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.3.5
+    Uninstalling numpy-2.3.5:
+      Successfully uninstalled numpy-2.3.5
+  Attempting uninstall: networkx
+    Found existing installation: networkx 3.6.1
+    Uninstalling networkx-3.6.1:
+      Successfully uninstalled networkx-3.6.1
+  Attempting uninstall: MarkupSafe
+    Found existing installation: MarkupSafe 3.0.3
+    Uninstalling MarkupSafe-3.0.3:
+      Successfully uninstalled MarkupSafe-3.0.3
+  Attempting uninstall: jsonpointer
+    Found existing installation: jsonpointer 3.0.0
+    Uninstalling jsonpointer-3.0.0:
+      Successfully uninstalled jsonpointer-3.0.0
+  Attempting uninstall: joblib
+    Found existing installation: joblib 1.5.3
+    Uninstalling joblib-1.5.3:
+      Successfully uninstalled joblib-1.5.3
+  Attempting uninstall: jiter
+    Found existing installation: jiter 0.12.0
+    Uninstalling jiter-0.12.0:
+      Successfully uninstalled jiter-0.12.0
+  Attempting uninstall: iniconfig
+    Found existing installation: iniconfig 2.3.0
+    Uninstalling iniconfig-2.3.0:
+      Successfully uninstalled iniconfig-2.3.0
+  Attempting uninstall: idna
+    Found existing installation: idna 3.11
+    Uninstalling idna-3.11:
+      Successfully uninstalled idna-3.11
+  Attempting uninstall: hyperframe
+    Found existing installation: hyperframe 6.1.0
+    Uninstalling hyperframe-6.1.0:
+      Successfully uninstalled hyperframe-6.1.0
+  Attempting uninstall: httptools
+    Found existing installation: httptools 0.7.1
+    Uninstalling httptools-0.7.1:
+      Successfully uninstalled httptools-0.7.1
+  Attempting uninstall: hpack
+    Found existing installation: hpack 4.1.0
+    Uninstalling hpack-4.1.0:
+      Successfully uninstalled hpack-4.1.0
+  Attempting uninstall: h11
+    Found existing installation: h11 0.16.0
+    Uninstalling h11-0.16.0:
+      Successfully uninstalled h11-0.16.0
+  Attempting uninstall: greenlet
+    Found existing installation: greenlet 3.3.0
+    Uninstalling greenlet-3.3.0:
+      Successfully uninstalled greenlet-3.3.0
+  Attempting uninstall: fsspec
+    Found existing installation: fsspec 2025.12.0
+    Uninstalling fsspec-2025.12.0:
+      Successfully uninstalled fsspec-2025.12.0
+  Attempting uninstall: filelock
+    Found existing installation: filelock 3.20.0
+    Uninstalling filelock-3.20.0:
+      Successfully uninstalled filelock-3.20.0
+  Attempting uninstall: fastavro
+    Found existing installation: fastavro 1.12.1
+    Uninstalling fastavro-1.12.1:
+      Successfully uninstalled fastavro-1.12.1
+  Attempting uninstall: distro
+    Found existing installation: distro 1.9.0
+    Uninstalling distro-1.9.0:
+      Successfully uninstalled distro-1.9.0
+  Attempting uninstall: colorama
+    Found existing installation: colorama 0.4.6
+    Uninstalling colorama-0.4.6:
+      Successfully uninstalled colorama-0.4.6
+  Attempting uninstall: charset_normalizer
+    Found existing installation: charset-normalizer 3.4.4
+    Uninstalling charset-normalizer-3.4.4:
+      Successfully uninstalled charset-normalizer-3.4.4
+  Attempting uninstall: certifi
+    Found existing installation: certifi 2025.11.12
+    Uninstalling certifi-2025.11.12:
+      Successfully uninstalled certifi-2025.11.12
+  Attempting uninstall: cachetools
+    Found existing installation: cachetools 6.2.4
+    Uninstalling cachetools-6.2.4:
+      Successfully uninstalled cachetools-6.2.4
+  Attempting uninstall: bcrypt
+    Found existing installation: bcrypt 5.0.0
+    Uninstalling bcrypt-5.0.0:
+      Successfully uninstalled bcrypt-5.0.0
+  Attempting uninstall: annotated-types
+    Found existing installation: annotated-types 0.7.0
+    Uninstalling annotated-types-0.7.0:
+      Successfully uninstalled annotated-types-0.7.0
+  Attempting uninstall: typing-inspection
+    Found existing installation: typing-inspection 0.4.2
+    Uninstalling typing-inspection-0.4.2:
+      Successfully uninstalled typing-inspection-0.4.2
+  Attempting uninstall: types-requests
+    Found existing installation: types-requests 2.32.4.20250913
+    Uninstalling types-requests-2.32.4.20250913:
+      Successfully uninstalled types-requests-2.32.4.20250913
+  Attempting uninstall: tqdm
+    Found existing installation: tqdm 4.67.1
+    Uninstalling tqdm-4.67.1:
+      Successfully uninstalled tqdm-4.67.1
+  Attempting uninstall: SQLAlchemy
+    Found existing installation: SQLAlchemy 2.0.45
+    Uninstalling SQLAlchemy-2.0.45:
+      Successfully uninstalled SQLAlchemy-2.0.45
+  Attempting uninstall: scipy
+    Found existing installation: scipy 1.16.3
+    Uninstalling scipy-1.16.3:
+      Successfully uninstalled scipy-1.16.3
+  Attempting uninstall: rsa
+    Found existing installation: rsa 4.9.1
+    Uninstalling rsa-4.9.1:
+      Successfully uninstalled rsa-4.9.1
+  Attempting uninstall: requests
+    Found existing installation: requests 2.32.5
+    Uninstalling requests-2.32.5:
+      Successfully uninstalled requests-2.32.5
+  Attempting uninstall: pytest
+    Found existing installation: pytest 9.0.2
+    Uninstalling pytest-9.0.2:
+      Successfully uninstalled pytest-9.0.2
+  Attempting uninstall: pydantic-core
+    Found existing installation: pydantic_core 2.41.5
+    Uninstalling pydantic_core-2.41.5:
+      Successfully uninstalled pydantic_core-2.41.5
+  Attempting uninstall: pyasn1-modules
+    Found existing installation: pyasn1_modules 0.4.2
+    Uninstalling pyasn1_modules-0.4.2:
+      Successfully uninstalled pyasn1_modules-0.4.2
+  Attempting uninstall: proto-plus
+    Found existing installation: proto-plus 1.27.0
+    Uninstalling proto-plus-1.27.0:
+      Successfully uninstalled proto-plus-1.27.0
+  Attempting uninstall: mangum
+    Found existing installation: mangum 0.19.0
+    Uninstalling mangum-0.19.0:
+      Successfully uninstalled mangum-0.19.0
+  Attempting uninstall: jsonpatch
+    Found existing installation: jsonpatch 1.33
+    Uninstalling jsonpatch-1.33:
+      Successfully uninstalled jsonpatch-1.33
+  Attempting uninstall: jinja2
+    Found existing installation: Jinja2 3.1.6
+    Uninstalling Jinja2-3.1.6:
+      Successfully uninstalled Jinja2-3.1.6
+  Attempting uninstall: httplib2
+    Found existing installation: httplib2 0.31.0
+    Uninstalling httplib2-0.31.0:
+      Successfully uninstalled httplib2-0.31.0
+  Attempting uninstall: httpcore
+    Found existing installation: httpcore 1.0.9
+    Uninstalling httpcore-1.0.9:
+      Successfully uninstalled httpcore-1.0.9
+  Attempting uninstall: h2
+    Found existing installation: h2 4.3.0
+    Uninstalling h2-4.3.0:
+      Successfully uninstalled h2-4.3.0
+  Attempting uninstall: grpcio
+    Found existing installation: grpcio 1.76.0
+    Uninstalling grpcio-1.76.0:
+      Successfully uninstalled grpcio-1.76.0
+  Attempting uninstall: googleapis-common-protos
+    Found existing installation: googleapis-common-protos 1.72.0
+    Uninstalling googleapis-common-protos-1.72.0:
+      Successfully uninstalled googleapis-common-protos-1.72.0
+  Attempting uninstall: ecdsa
+    Found existing installation: ecdsa 0.19.1
+    Uninstalling ecdsa-0.19.1:
+      Successfully uninstalled ecdsa-0.19.1
+  Attempting uninstall: click
+    Found existing installation: click 8.3.1
+    Uninstalling click-8.3.1:
+      Successfully uninstalled click-8.3.1
+  Attempting uninstall: cffi
+    Found existing installation: cffi 2.0.0
+    Uninstalling cffi-2.0.0:
+      Successfully uninstalled cffi-2.0.0
+  Attempting uninstall: beautifulsoup4
+    Found existing installation: beautifulsoup4 4.14.3
+    Uninstalling beautifulsoup4-4.14.3:
+      Successfully uninstalled beautifulsoup4-4.14.3
+  Attempting uninstall: anyio
+    Found existing installation: anyio 4.12.0
+    Uninstalling anyio-4.12.0:
+      Successfully uninstalled anyio-4.12.0
+  Attempting uninstall: watchfiles
+    Found existing installation: watchfiles 1.1.1
+    Uninstalling watchfiles-1.1.1:
+      Successfully uninstalled watchfiles-1.1.1
+  Attempting uninstall: uvicorn
+    Found existing installation: uvicorn 0.32.1
+    Uninstalling uvicorn-0.32.1:
+      Successfully uninstalled uvicorn-0.32.1
+  Attempting uninstall: torch
+    Found existing installation: torch 2.9.1
+    Uninstalling torch-2.9.1:
+      Successfully uninstalled torch-2.9.1
+  Attempting uninstall: tiktoken
+    Found existing installation: tiktoken 0.12.0
+    Uninstalling tiktoken-0.12.0:
+      Successfully uninstalled tiktoken-0.12.0
+  Attempting uninstall: starlette
+    Found existing installation: starlette 0.41.3
+    Uninstalling starlette-0.41.3:
+      Successfully uninstalled starlette-0.41.3
+  Attempting uninstall: scikit-learn
+    Found existing installation: scikit-learn 1.8.0
+    Uninstalling scikit-learn-1.8.0:
+      Successfully uninstalled scikit-learn-1.8.0
+  Attempting uninstall: requests-toolbelt
+    Found existing installation: requests-toolbelt 1.0.0
+    Uninstalling requests-toolbelt-1.0.0:
+      Successfully uninstalled requests-toolbelt-1.0.0
+  Attempting uninstall: python-jose
+    Found existing installation: python-jose 3.5.0
+    Uninstalling python-jose-3.5.0:
+      Successfully uninstalled python-jose-3.5.0
+  Attempting uninstall: pydantic
+    Found existing installation: pydantic 2.12.5
+    Uninstalling pydantic-2.12.5:
+      Successfully uninstalled pydantic-2.12.5
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface-hub 0.36.0
+    Uninstalling huggingface-hub-0.36.0:
+      Successfully uninstalled huggingface-hub-0.36.0
+  Attempting uninstall: httpx
+    Found existing installation: httpx 0.28.1
+    Uninstalling httpx-0.28.1:
+      Successfully uninstalled httpx-0.28.1
+  Attempting uninstall: grpcio-status
+    Found existing installation: grpcio-status 1.71.2
+    Uninstalling grpcio-status-1.71.2:
+      Successfully uninstalled grpcio-status-1.71.2
+  Attempting uninstall: google-auth
+    Found existing installation: google-auth 2.45.0
+    Uninstalling google-auth-2.45.0:
+      Successfully uninstalled google-auth-2.45.0
+  Attempting uninstall: cryptography
+    Found existing installation: cryptography 46.0.3
+    Uninstalling cryptography-46.0.3:
+      Successfully uninstalled cryptography-46.0.3
+  Attempting uninstall: tokenizers
+    Found existing installation: tokenizers 0.22.1
+    Uninstalling tokenizers-0.22.1:
+      Successfully uninstalled tokenizers-0.22.1
+  Attempting uninstall: sqlmodel
+    Found existing installation: sqlmodel 0.0.22
+    Uninstalling sqlmodel-0.0.22:
+      Successfully uninstalled sqlmodel-0.0.22
+  Attempting uninstall: pydantic-settings
+    Found existing installation: pydantic-settings 2.7.0
+    Uninstalling pydantic-settings-2.7.0:
+      Successfully uninstalled pydantic-settings-2.7.0
+  Attempting uninstall: openai
+    Found existing installation: openai 2.14.0
+    Uninstalling openai-2.14.0:
+      Successfully uninstalled openai-2.14.0
+  Attempting uninstall: langsmith
+    Found existing installation: langsmith 0.5.0
+    Uninstalling langsmith-0.5.0:
+      Successfully uninstalled langsmith-0.5.0
+  Attempting uninstall: langgraph-sdk
+    Found existing installation: langgraph-sdk 0.3.1
+    Uninstalling langgraph-sdk-0.3.1:
+      Successfully uninstalled langgraph-sdk-0.3.1
+  Attempting uninstall: groq
+    Found existing installation: groq 1.0.0
+    Uninstalling groq-1.0.0:
+      Successfully uninstalled groq-1.0.0
+  Attempting uninstall: google-auth-httplib2
+    Found existing installation: google-auth-httplib2 0.3.0
+    Uninstalling google-auth-httplib2-0.3.0:
+      Successfully uninstalled google-auth-httplib2-0.3.0
+  Attempting uninstall: google-api-core
+    Found existing installation: google-api-core 2.25.2
+    Uninstalling google-api-core-2.25.2:
+      Successfully uninstalled google-api-core-2.25.2
+  Attempting uninstall: fastapi
+    Found existing installation: fastapi 0.115.4
+    Uninstalling fastapi-0.115.4:
+      Successfully uninstalled fastapi-0.115.4
+  Attempting uninstall: transformers
+    Found existing installation: transformers 4.57.3
+    Uninstalling transformers-4.57.3:
+      Successfully uninstalled transformers-4.57.3
+  Attempting uninstall: qdrant-client
+    Found existing installation: qdrant-client 1.9.0
+    Uninstalling qdrant-client-1.9.0:
+      Successfully uninstalled qdrant-client-1.9.0
+  Attempting uninstall: langchain-core
+    Found existing installation: langchain-core 1.2.4
+    Uninstalling langchain-core-1.2.4:
+      Successfully uninstalled langchain-core-1.2.4
+  Attempting uninstall: google-api-python-client
+    Found existing installation: google-api-python-client 2.187.0
+    Uninstalling google-api-python-client-2.187.0:
+      Successfully uninstalled google-api-python-client-2.187.0
+  Attempting uninstall: cohere
+    Found existing installation: cohere 4.49
+    Uninstalling cohere-4.49:
+      Successfully uninstalled cohere-4.49
+  Attempting uninstall: sentence-transformers
+    Found existing installation: sentence-transformers 5.2.0
+    Uninstalling sentence-transformers-5.2.0:
+      Successfully uninstalled sentence-transformers-5.2.0
+  Attempting uninstall: langgraph-checkpoint
+    Found existing installation: langgraph-checkpoint 3.0.1
+    Uninstalling langgraph-checkpoint-3.0.1:
+      Successfully uninstalled langgraph-checkpoint-3.0.1
+  Attempting uninstall: langchain-openai
+    Found existing installation: langchain-openai 1.1.6
+    Uninstalling langchain-openai-1.1.6:
+      Successfully uninstalled langchain-openai-1.1.6
+  Attempting uninstall: google-ai-generativelanguage
+    Found existing installation: google-ai-generativelanguage 0.6.15
+    Uninstalling google-ai-generativelanguage-0.6.15:
+      Successfully uninstalled google-ai-generativelanguage-0.6.15
+  Attempting uninstall: langgraph-prebuilt
+    Found existing installation: langgraph-prebuilt 1.0.5
+    Uninstalling langgraph-prebuilt-1.0.5:
+      Successfully uninstalled langgraph-prebuilt-1.0.5
+  Attempting uninstall: google-generativeai
+    Found existing installation: google-generativeai 0.8.6
+    Uninstalling google-generativeai-0.8.6:
+      Successfully uninstalled google-generativeai-0.8.6
+  Attempting uninstall: langgraph
+    Found existing installation: langgraph 1.0.5
+    Uninstalling langgraph-1.0.5:
+      Successfully uninstalled langgraph-1.0.5
+  Attempting uninstall: langchain
+    Found existing installation: langchain 1.2.0
+    Uninstalling langchain-1.2.0:
+      Successfully uninstalled langchain-1.2.0
+
+Successfully installed MarkupSafe-3.0.3 SQLAlchemy-2.0.45 annotated-types-0.7.0 anyio-4.12.0 bcrypt-5.0.0 beautifulsoup4-4.14.3 cachetools-6.2.4 certifi-2025.11.12 cffi-2.0.0 charset_normalizer-3.4.4 click-8.3.1 cohere-5.20.1 colorama-0.4.6 cryptography-46.0.3 distro-1.9.0 ecdsa-0.19.1 fastapi-0.115.4 fastavro-1.12.1 filelock-3.20.1 fsspec-2025.12.0 google-ai-generativelanguage-0.6.15 google-api-core-2.25.2 google-api-python-client-2.187.0 google-auth-2.45.0 google-auth-httplib2-0.3.0 google-generativeai-0.8.6 googleapis-common-protos-1.72.0 greenlet-3.3.0 groq-1.0.0 grpcio-1.76.0 grpcio-status-1.71.2 h11-0.16.0 h2-4.3.0 hpack-4.1.0 httpcore-1.0.9 httplib2-0.31.0 httptools-0.7.1 httpx-0.28.1 huggingface-hub-0.36.0 hyperframe-6.1.0 idna-3.11 iniconfig-2.3.0 jinja2-3.1.6 jiter-0.12.0 joblib-1.5.3 jsonpatch-1.33 jsonpointer-3.0.0 langchain-1.2.0 langchain-core-1.2.5 langchain-openai-1.1.6 langgraph-1.0.5 langgraph-checkpoint-3.0.1 langgraph-prebuilt-1.0.5 langgraph-sdk-0.3.1 langsmith-0.5.1 mangum-0.19.0 mpmath-1.3.0 networkx-3.6.1 numpy-2.4.0 openai-2.14.0 orjson-3.11.5 ormsgpack-1.12.1 packaging-25.0 passlib-1.7.4 pluggy-1.6.0 portalocker-3.2.0 proto-plus-1.27.0 protobuf-5.29.5 pyasn1-0.6.1 pyasn1-modules-0.4.2 pycparser-2.23 pydantic-2.12.5 pydantic-core-2.41.5 pydantic-settings-2.7.0 pygments-2.19.2 pyparsing-3.3.1 pytest-9.0.2 python-dotenv-1.2.1 python-jose-3.3.0 python-multipart-0.0.20 pywin32-311 pyyaml-6.0.3 qdrant-client-1.16.2 regex-2025.11.3 requests-2.32.5 requests-toolbelt-1.0.0 rsa-4.9.1 safetensors-0.7.0 scikit-learn-1.8.0 scipy-1.16.3 sentence-transformers-5.2.0 setuptools-80.9.0 six-1.17.0 sniffio-1.3.1 soupsieve-2.8.1 sqlmodel-0.0.22 starlette-0.41.3 sympy-1.14.0 tenacity-9.1.2 threadpoolctl-3.6.0 tiktoken-0.12.0 tokenizers-0.22.1 torch-2.9.1 tqdm-4.67.1 transformers-4.57.3 types-requests-2.32.4.20250913 typing-extensions-4.15.0 typing-inspection-0.4.2 uritemplate-4.2.0 urllib3-2.6.2 uuid-utils-0.12.0 uvicorn-0.32.1 watchfiles-1.1.1 websockets-15.0.1 xxhash-3.6.0 zstandard-0.25.0

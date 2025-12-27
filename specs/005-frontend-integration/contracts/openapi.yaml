@@ -1,0 +1,280 @@
+openapi: 3.0.0
+info:
+  title: Frontend Integration API
+  version: 1.0.0
+  description: API contracts for frontend authentication, personalization, and translation features
+
+paths:
+  /auth/signup:
+    post:
+      summary: Register a new user
+      description: Creates a new user account with profile information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - programming_level
+                - ai_experience
+                - gpu_available
+                - ram_size
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "securepassword123"
+                programming_level:
+                  type: string
+                  enum: [beginner, intermediate, advanced]
+                  example: "intermediate"
+                ai_experience:
+                  type: string
+                  enum: [none, basic, intermediate, advanced]
+                  example: "basic"
+                gpu_available:
+                  type: boolean
+                  example: true
+                ram_size:
+                  type: string
+                  example: "16GB"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  token_type:
+                    type: string
+                    example: "bearer"
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Invalid email format"
+        '409':
+          description: Conflict - email already registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Email already registered"
+
+  /auth/signin:
+    post:
+      summary: Sign in a user
+      description: Authenticates a user and returns a JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "securepassword123"
+      responses:
+        '200':
+          description: User signed in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  token_type:
+                    type: string
+                    example: "bearer"
+        '400':
+          description: Bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Incorrect email or password"
+        '401':
+          description: Unauthorized - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Incorrect email or password"
+
+  /chapter/personalize:
+    post:
+      summary: Personalize chapter content
+      description: Generate personalized content based on user profile
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - chapter_content
+              properties:
+                chapter_content:
+                  type: string
+                  example: "Physical AI represents a paradigm shift..."
+      responses:
+        '200':
+          description: Content personalized successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  personalized_content:
+                    type: string
+                    example: "Physical AI, in simple terms, represents a paradigm shift..."
+                  processing_time:
+                    type: number
+                    example: 4.2
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Chapter content is required"
+        '401':
+          description: Unauthorized - invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Authentication required"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Internal server error occurred"
+
+  /chapter/translate:
+    post:
+      summary: Translate chapter content to Urdu
+      description: Generate Urdu translation of chapter content
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - chapter_content
+              properties:
+                chapter_content:
+                  type: string
+                  example: "Physical AI represents a paradigm shift..."
+      responses:
+        '200':
+          description: Content translated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  translated_content:
+                    type: string
+                    example: "فزیکل اے آئی ایک نئے انداز کی نمائندگی کرتا ہے..."
+                  language:
+                    type: string
+                    example: "ur"
+                  processing_time:
+                    type: number
+                    example: 3.8
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Chapter content is required"
+        '401':
+          description: Unauthorized - invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Authentication required"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Internal server error occurred"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

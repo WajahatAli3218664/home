@@ -1,0 +1,670 @@
+openapi: 3.0.3
+info:
+  title: Textbook Generation API
+  description: API for the Physical AI & Humanoid Robotics textbook platform
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@textbook-platform.com
+
+servers:
+  - url: https://api.textbook-platform.com/v1
+    description: Production server
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Creates a new user account with specified background level
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticates a user and returns a token
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /chapters:
+    get:
+      summary: Get all textbook chapters
+      description: Retrieves a list of all textbook chapters
+      tags:
+        - Chapters
+      parameters:
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: Number of items to skip
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+          description: Maximum number of items to return
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /chapters/{chapterId}:
+    get:
+      summary: Get a specific chapter
+      description: Retrieves a specific textbook chapter by ID
+      tags:
+        - Chapters
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chapter identifier
+        - name: background_level
+          in: query
+          schema:
+            type: string
+            enum: [beginner, intermediate, advanced]
+          description: User's background level to personalize content
+      responses:
+        '200':
+          description: Chapter details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterWithContent'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chapters/{chapterId}/translate:
+    post:
+      summary: Translate chapter to Urdu
+      description: Translates a chapter to Urdu language
+      tags:
+        - Chapters
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chapter identifier
+      responses:
+        '200':
+          description: Translated chapter content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterTranslation'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /chapters/{chapterId}/learning-materials:
+    get:
+      summary: Get learning materials for a chapter
+      description: Retrieves auto-generated summaries, quizzes, and learning boosters for a chapter
+      tags:
+        - Learning Materials
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chapter identifier
+      responses:
+        '200':
+          description: Learning materials for the chapter
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LearningMaterial'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chat:
+    post:
+      summary: Chat with the AI assistant
+      description: Ask questions about textbook content to the AI assistant
+      tags:
+        - AI Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: AI response to the query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+      security:
+        - bearerAuth: []
+
+  /progress:
+    get:
+      summary: Get user's progress
+      description: Retrieves the user's progress across all chapters
+      tags:
+        - Progress
+      responses:
+        '200':
+          description: User's progress details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgressSummary'
+      security:
+        - bearerAuth: []
+
+  /progress/{chapterId}:
+    get:
+      summary: Get progress for specific chapter
+      description: Retrieves the user's progress for a specific chapter
+      tags:
+        - Progress
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chapter identifier
+      responses:
+        '200':
+          description: Progress details for the chapter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+
+    put:
+      summary: Update progress for specific chapter
+      description: Updates the user's progress for a specific chapter
+      tags:
+        - Progress
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chapter identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProgressRequest'
+      responses:
+        '200':
+          description: Progress updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - bearerAuth: []
+
+  /user/profile:
+    get:
+      summary: Get user profile
+      description: Retrieves the current user's profile information
+      tags:
+        - User
+      responses:
+        '200':
+          description: User profile details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+      security:
+        - bearerAuth: []
+
+    put:
+      summary: Update user profile
+      description: Updates the current user's profile information
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+        - bearerAuth: []
+
+components:
+  schemas:
+    UserRegistration:
+      type: object
+      required:
+        - email
+        - password
+        - name
+        - background_level
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          minLength: 8
+          example: securePassword123
+        name:
+          type: string
+          example: "John Doe"
+        background_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          example: "intermediate"
+
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          example: securePassword123
+
+    LoginResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        token_type:
+          type: string
+          example: "bearer"
+        user:
+          $ref: '#/components/schemas/UserProfile'
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "user-12345"
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        name:
+          type: string
+          example: "John Doe"
+        background_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          example: "intermediate"
+        preferences:
+          type: object
+          example:
+            language: "en"
+            theme: "light"
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "ch-001"
+        title:
+          type: string
+          example: "Introduction to Physical AI"
+        slug:
+          type: string
+          example: "introduction-to-physical-ai"
+        position:
+          type: integer
+          example: 1
+        word_count:
+          type: integer
+          example: 1500
+        estimated_reading_time:
+          type: integer
+          example: 6
+        version:
+          type: string
+          example: "1.0.0"
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+
+    ChapterWithContent:
+      allOf:
+        - $ref: '#/components/schemas/Chapter'
+        - type: object
+          properties:
+            content:
+              type: string
+              example: "Physical AI is an interdisciplinary field that combines robotics, machine learning, and control theory."
+            content_version:
+              type: string
+              example: "1.0.0"
+
+    ChapterTranslation:
+      type: object
+      properties:
+        chapter_id:
+          type: string
+          example: "ch-001"
+        original_language:
+          type: string
+          example: "en"
+        target_language:
+          type: string
+          example: "ur"
+        translated_content:
+          type: string
+          example: "فزکل ای آئی ایک بین الاقوامی شعبہ ہے جو روبوٹکس، مشین لرننگ اور کنٹرول تھیوری کو جوڑتا ہے۔"
+        translated_at:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+
+    LearningMaterial:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "lm-123"
+        chapter_id:
+          type: string
+          example: "ch-001"
+        material_type:
+          type: string
+          enum: [summary, quiz, learning_booster]
+          example: "summary"
+        content:
+          type: string
+          example: "This chapter introduced the fundamental concepts of Physical AI..."
+        version:
+          type: string
+          example: "1.0.0"
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+
+    ChatRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "What is Physical AI?"
+        context:
+          type: string
+          example: "chapter-001"
+        session_id:
+          type: string
+          example: "sess-123"
+
+    ChatResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          example: "Physical AI is an interdisciplinary field that combines robotics, machine learning, and control theory..."
+        context_used:
+          type: string
+          example: "Chapter 1, Section 1.2"
+        sources:
+          type: array
+          items:
+            type: string
+          example: ["Section 1.2", "Chapter Introduction"]
+        session_id:
+          type: string
+          example: "sess-123"
+
+    UserProgress:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "up-123"
+        user_id:
+          type: string
+          example: "user-123"
+        chapter_id:
+          type: string
+          example: "ch-001"
+        content_version:
+          type: string
+          example: "1.0.0"
+        progress_percentage:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 75.0
+        last_accessed:
+          type: string
+          format: date-time
+          example: "2023-12-09T10:00:00Z"
+        completed:
+          type: boolean
+          example: false
+        quiz_score:
+          type: object
+          example:
+            score: 8
+            total: 10
+            percentage: 80.0
+        time_spent:
+          type: integer
+          example: 360  # seconds
+
+    UserProgressSummary:
+      type: object
+      properties:
+        total_chapters:
+          type: integer
+          example: 12
+        completed_chapters:
+          type: integer
+          example: 3
+        overall_progress:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 25.0
+        chapters:
+          type: array
+            items:
+              $ref: '#/components/schemas/UserProgress'
+
+    UpdateProgressRequest:
+      type: object
+      properties:
+        progress_percentage:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 75.0
+        completed:
+          type: boolean
+          example: false
+        time_spent:
+          type: integer
+          example: 300  # additional seconds spent
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "John Smith"
+        background_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          example: "advanced"
+        preferences:
+          type: object
+          example:
+            language: "ur"
+            theme: "dark"
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Resource already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: External service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+          example: "Error message details"

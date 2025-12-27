@@ -1,0 +1,81 @@
+.book-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.book-header {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.book-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.book-content-area {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.book-reader-container {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  border-right: 1px solid #e9ecef;
+}
+
+.book-content {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.book-content h1, .book-content h2, .book-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-content p {
+  margin-bottom: 1rem;
+}
+
+.chat-container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #e9ecef;
+}
+
+.selection-handler {
+  padding: 0.5rem;
+  background-color: #e7f3ff;
+  border-bottom: 1px solid #cce5ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selected-text-preview {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #004085;
+}
+
+.clear-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.clear-button:hover {
+  background-color: #0056b3;
+}

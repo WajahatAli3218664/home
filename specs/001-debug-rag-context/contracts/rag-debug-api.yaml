@@ -1,0 +1,108 @@
+# RAG Context Debugging API Contract
+
+## Overview
+This API contract defines endpoints for debugging the RAG context flow issue, allowing developers to test and verify the proper flow of context from Qdrant to the LLM.
+
+## Endpoints
+
+### GET /debug/context-flow
+Test the complete flow from query to context retrieval to LLM response.
+
+**Request Parameters:**
+- `query` (string, required): The user query to test
+- `debug` (boolean, optional): Whether to include detailed debug information (default: false)
+
+**Request Example:**
+```
+GET /debug/context-flow?query=What+are+the+principles+of+robot+kinematics&debug=true
+```
+
+**Response:**
+```
+{
+  "query": "What are the principles of robot kinematics",
+  "retrieved_context": [
+    {
+      "id": "context_123",
+      "content": "Robot kinematics is the study of motion in robotic systems...",
+      "source_document": "chapter_3_kinematics.md",
+      "similarity_score": 0.87
+    }
+  ],
+  "llm_prompt": "Based on the following context: Robot kinematics is the study of motion in robotic systems... Answer the question: What are the principles of robot kinematics",
+  "llm_response": "The principles of robot kinematics include forward kinematics...",
+  "debug_info": {
+    "context_retrieval_time": 120,
+    "llm_call_time": 450,
+    "total_processing_time": 570
+  }
+}
+```
+
+**Status Codes:**
+- 200: Success
+- 400: Invalid query parameter
+- 500: Internal server error during context retrieval or LLM call
+
+### POST /debug/test-prompt
+Test a specific prompt with the LLM to verify proper context injection.
+
+**Request Body:**
+```json
+{
+  "user_query": "What are the principles of robot kinematics?",
+  "retrieved_context": [
+    {
+      "content": "Robot kinematics is the study of motion in robotic systems...",
+      "source_document": "chapter_3_kinematics.md"
+    }
+  ],
+  "custom_prompt_template": "Based on the following context: {context} Answer the question: {query}"
+}
+```
+
+**Response:**
+```
+{
+  "input_prompt": "Based on the following context: Robot kinematics is the study of motion in robotic systems... Answer the question: What are the principles of robot kinematics?",
+  "llm_response": "The principles of robot kinematics include forward kinematics...",
+  "processing_time": 450
+}
+```
+
+**Status Codes:**
+- 200: Success
+- 400: Invalid request body
+- 500: Internal server error during LLM call
+
+### GET /debug/log-context
+Retrieve the most recent context sent to the LLM for debugging purposes.
+
+**Request Example:**
+```
+GET /debug/log-context
+```
+
+**Response:**
+```
+{
+  "recent_context": {
+    "timestamp": "2025-12-24T10:30:00Z",
+    "user_query": "What are the principles of robot kinematics?",
+    "retrieved_context": [
+      {
+        "id": "context_123",
+        "content": "Robot kinematics is the study of motion in robotic systems...",
+        "source_document": "chapter_3_kinematics.md",
+        "similarity_score": 0.87
+      }
+    ],
+    "formatted_prompt": "Based on the following context: Robot kinematics is the study of motion in robotic systems... Answer the question: What are the principles of robot kinematics"
+  }
+}
+```
+
+**Status Codes:**
+- 200: Success
+- 404: No recent context found
+- 500: Internal server error

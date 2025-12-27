@@ -1,0 +1,142 @@
+/* Start Where You Are Section Styles */
+.startSection {
+  padding: 5rem 0;
+  background-color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.textCenter {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0d47a1; /* blue-800 */
+  margin-bottom: 1rem;
+}
+
+.sectionSubtitle {
+  font-size: 1.25rem;
+  color: #0d47a1; /* blue-800 */
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.optionCard {
+  background-color: #f0f8ff; /* light blue-50 */
+  border: 1px solid #b3e5fc; /* blue-200 */
+  border-radius: 0.75rem; /* rounded-lg */
+  padding: 2rem;
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+
+.optionCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cardTitle {
+  font-size: 1.25rem; /* text-lg */
+  font-weight: bold;
+  color: #0d47a1; /* blue-800 */
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; /* rounded-full */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.blueTag {
+  background-color: #b3e5fc; /* blue-200 */
+  color: #0d47a1; /* blue-800 */
+}
+
+.greenTag {
+  background-color: #b2ebf2; /* cyan-200 */
+  color: #006064; /* cyan-800 */
+}
+
+.purpleTag {
+  background-color: #b39ddb; /* indigo-200 */
+  color: #4527a0; /* indigo-800 */
+}
+
+.yellowTag {
+  background-color: #fff9c4; /* yellow-200 */
+  color: #f57f17; /* yellow-800 */
+}
+
+.redTag {
+  background-color: #ffcdd2; /* red-200 */
+  color: #c62828; /* red-800 */
+}
+
+.defaultTag {
+  background-color: #b3e5fc; /* blue-200 */
+  color: #0d47a1; /* blue-800 */
+}
+
+.priceTag {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0d47a1; /* blue-800 */
+  margin: 0.25rem 0;
+}
+
+.priceDetail {
+  color: #0d47a1; /* blue-800 */
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  color: #0d47a1; /* blue-800 */
+}
+
+.featureItem {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #b3e5fc; /* border-blue-200 */
+}
+
+.featureItem:last-child {
+  border-bottom: none;
+}

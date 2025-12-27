@@ -1,0 +1,78 @@
+/* frontend/src/css/rtl.css */
+/* Styles for right-to-left languages like Urdu */
+
+/* Apply RTL direction to elements */
+.rtl,
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Specific styles for Urdu text */
+.urdu-text {
+  font-family: "Noto Sans Arabic", "Amiri", "Traditional Arabic", sans-serif;
+  direction: rtl;
+  text-align: justify;
+  line-height: 1.8;
+}
+
+/* RTL adjustments for content display */
+.chapter-content[dir="rtl"] {
+  text-align: right;
+}
+
+/* Adjust margins and padding for RTL */
+.margin-start-rtl {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+.margin-end-rtl {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+.padding-start-rtl {
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
+.padding-end-rtl {
+  padding-left: 1rem;
+  padding-right: 0;
+}
+
+/* RTL list styling */
+.list-rtl {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.list-rtl li {
+  text-align: right;
+}
+
+/* RTL table adjustments */
+.table-rtl {
+  direction: rtl;
+}
+
+.table-rtl th,
+.table-rtl td {
+  text-align: right;
+}
+
+/* RTL button positioning */
+.btn-rtl-group {
+  text-align: right;
+  direction: rtl;
+}
+
+.btn-rtl-group .btn {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+.btn-rtl-group .btn:last-child {
+  margin-left: 0;
+}

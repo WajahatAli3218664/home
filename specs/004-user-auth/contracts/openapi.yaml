@@ -1,0 +1,344 @@
+openapi: 3.0.0
+info:
+  title: Authentication, Personalization, and Translation API
+  version: 1.0.0
+  description: API for user authentication, content personalization, and Urdu translation
+
+paths:
+  /auth/signup:
+    post:
+      summary: Register a new user
+      description: Creates a new user account with profile information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - programming_level
+                - ai_experience
+                - gpu_available
+                - ram_size
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "securepassword123"
+                programming_level:
+                  type: string
+                  enum: [beginner, intermediate, advanced]
+                  example: "intermediate"
+                ai_experience:
+                  type: string
+                  enum: [none, basic, intermediate, advanced]
+                  example: "basic"
+                gpu_available:
+                  type: boolean
+                  example: true
+                ram_size:
+                  type: string
+                  example: "16GB"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Account created successfully"
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /auth/signin:
+    post:
+      summary: Sign in a user
+      description: Authenticates a user and returns a session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "securepassword123"
+      responses:
+        '200':
+          description: User signed in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /user/profile:
+    get:
+      summary: Get user profile
+      description: Retrieves the authenticated user's profile information
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      summary: Update user profile
+      description: Updates the authenticated user's profile information
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                programming_level:
+                  type: string
+                  enum: [beginner, intermediate, advanced]
+                ai_experience:
+                  type: string
+                  enum: [none, basic, intermediate, advanced]
+                gpu_available:
+                  type: boolean
+                ram_size:
+                  type: string
+      responses:
+        '200':
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /chapter/personalize:
+    post:
+      summary: Personalize chapter content
+      description: Generate personalized content based on user profile
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - chapter_id
+                - chapter_content
+              properties:
+                chapter_id:
+                  type: string
+                  example: "foundations-of-physical-ai"
+                chapter_content:
+                  type: string
+                  example: "Physical AI represents a paradigm shift..."
+      responses:
+        '200':
+          description: Content personalized successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  personalized_content:
+                    type: string
+                    example: "Physical AI, in simple terms, represents a paradigm shift..."
+                  processing_time:
+                    type: number
+                    example: 4.2
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /chapter/translate:
+    post:
+      summary: Translate chapter content to Urdu
+      description: Generate Urdu translation of chapter content
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - chapter_id
+                - chapter_content
+              properties:
+                chapter_id:
+                  type: string
+                  example: "foundations-of-physical-ai"
+                chapter_content:
+                  type: string
+                  example: "Physical AI represents a paradigm shift..."
+      responses:
+        '200':
+          description: Content translated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  translated_content:
+                    type: string
+                    example: "فزیکل اے آئی ایک نئے انداز کی نمائندگی کرتا ہے..."
+                  language:
+                    type: string
+                    example: "ur"
+                  processing_time:
+                    type: number
+                    example: 3.8
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        email:
+          type: string
+          format: email
+          example: "user@example.com"
+        programming_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          example: "intermediate"
+        ai_experience:
+          type: string
+          enum: [none, basic, intermediate, advanced]
+          example: "basic"
+        gpu_available:
+          type: boolean
+          example: true
+        ram_size:
+          type: string
+          example: "16GB"
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-12-16T10:00:00Z"
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: string
+                example: "Invalid email format"
+    Unauthorized:
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: string
+                example: "Authentication required"
+    Conflict:
+      description: Conflict - resource already exists
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: string
+                example: "Email already registered"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: string
+                example: "Internal server error occurred"

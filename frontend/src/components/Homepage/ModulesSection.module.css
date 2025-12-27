@@ -1,0 +1,79 @@
+/* Modules Section Styles */
+.modulesSection {
+  padding: 5rem 0;
+  background-color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.moduleCard {
+  background-color: #f0f8ff; /* Light blue-50 */
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 2rem;
+  border: 1px solid #b3e5fc; /* border-blue-200 */
+  transition: box-shadow 0.3s;
+}
+
+.moduleCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.moduleTitle {
+  font-size: 1.25rem; /* text-lg */
+  font-weight: bold;
+  color: #0d47a1; /* blue-800 */
+  margin-bottom: 1rem;
+}
+
+.topicsList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  color: #0d47a1; /* blue-800 */
+}
+
+.topicItem {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #b3e5fc; /* border-blue-200 */
+}
+
+.topicItem:last-child {
+  border-bottom: none;
+}
+
+.durationBadge {
+  background-color: #b3e5fc; /* blue-200 */
+  color: #0d47a1; /* blue-800 */
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px; /* rounded-full */
+  font-weight: 600;
+  font-size: 0.875rem; /* text-sm */
+  align-self: flex-start;
+}

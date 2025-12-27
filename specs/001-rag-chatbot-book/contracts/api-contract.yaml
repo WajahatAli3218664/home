@@ -1,0 +1,212 @@
+# API Contract: RAG Chatbot Service
+
+## Overview
+This document defines the API contracts for the RAG Chatbot service integrated into the published book. The service enables users to ask questions about book content and receive accurate answers based solely on the information provided in the book.
+
+## Base URL
+`/api/v1`
+
+## Authentication
+All endpoints require authentication via Better-Auth tokens in the Authorization header.
+
+## Endpoints
+
+### 1. Process User Query
+`POST /chat`
+
+Process a user query and return a response based on book content.
+
+#### Request
+```json
+{
+  "query": "What is the main concept of chapter 3?",
+  "book_id": "book-123",
+  "session_id": "session-456",
+  "selected_text": "Optional selected text from the book"
+}
+```
+
+#### Request Parameters
+- `query` (string, required): The user's question about the book content
+- `book_id` (string, required): The ID of the book being queried
+- `session_id` (string, required): The ID of the chat session
+- `selected_text` (string, optional): Text selected by the user, if any
+
+#### Response (Success)
+**Status Code**: 200 OK
+```json
+{
+  "response": "The main concept of chapter 3 is...",
+  "confidence_level": "High",
+  "session_id": "session-456",
+  "message_id": "msg-789",
+  "retrieved_context": [
+    {
+      "chunk_id": "chunk-abc",
+      "text": "Relevant text from the book...",
+      "similarity_score": 0.85
+    }
+  ]
+}
+```
+
+#### Response (Validation Error)
+**Status Code**: 422 Unprocessable Entity
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "query"],
+      "msg": "Field required",
+      "type": "value_error.missing"
+    }
+  ]
+}
+```
+
+#### Response (Not Enough Information)
+**Status Code**: 200 OK
+```json
+{
+  "response": "The selected content does not contain enough information to answer this question",
+  "confidence_level": "Low",
+  "session_id": "session-456",
+  "message_id": "msg-789",
+  "retrieved_context": []
+}
+```
+
+### 2. Get Chat History
+`GET /chat/{session_id}`
+
+Retrieve the chat history for a specific session.
+
+#### Request Parameters
+- `session_id` (string): The ID of the chat session
+
+#### Response (Success)
+**Status Code**: 200 OK
+```json
+{
+  "session_id": "session-456",
+  "messages": [
+    {
+      "message_id": "msg-789",
+      "role": "user",
+      "content": "What is the main concept of chapter 3?",
+      "timestamp": "2025-12-23T10:00:00Z",
+      "confidence_level": null
+    },
+    {
+      "message_id": "msg-790",
+      "role": "assistant",
+      "content": "The main concept of chapter 3 is...",
+      "timestamp": "2025-12-23T10:00:05Z",
+      "confidence_level": "High"
+    }
+  ]
+}
+```
+
+### 3. Submit Feedback
+`POST /chat/{session_id}/feedback`
+
+Submit feedback on a specific chat response.
+
+#### Request
+```json
+{
+  "message_id": "msg-790",
+  "feedback_type": "positive",
+  "comment": "The response was accurate and helpful"
+}
+```
+
+#### Request Parameters
+- `session_id` (string): The ID of the chat session
+- `message_id` (string): The ID of the message being rated
+- `feedback_type` (string): Either "positive" or "negative"
+- `comment` (string, optional): Additional feedback comment
+
+#### Response (Success)
+**Status Code**: 200 OK
+```json
+{
+  "status": "Feedback received",
+  "message_id": "msg-790"
+}
+```
+
+### 4. Get Book Content Chunks
+`GET /books/{book_id}/chunks`
+
+Retrieve content chunks for a specific book (for internal use or debugging).
+
+#### Request Parameters
+- `book_id` (string): The ID of the book
+- `limit` (integer, optional): Maximum number of chunks to return (default: 10)
+- `offset` (integer, optional): Number of chunks to skip (default: 0)
+
+#### Response (Success)
+**Status Code**: 200 OK
+```json
+{
+  "book_id": "book-123",
+  "chunks": [
+    {
+      "chunk_id": "chunk-abc",
+      "content": "Content of the book chunk...",
+      "metadata": {
+        "page": 15,
+        "chapter": "Chapter 3",
+        "section": "3.1"
+      }
+    }
+  ],
+  "total_chunks": 100
+}
+```
+
+## Common Error Responses
+
+### 401 Unauthorized
+```json
+{
+  "detail": "Authentication required"
+}
+```
+
+### 404 Not Found
+```json
+{
+  "detail": "Session or resource not found"
+}
+```
+
+### 500 Internal Server Error
+```json
+{
+  "detail": "An unexpected error occurred"
+}
+```
+
+## Data Models
+
+### ChatResponse
+- `response` (string): The chatbot's response to the user's query
+- `confidence_level` (string): Confidence level of the response ("High", "Medium", "Low")
+- `session_id` (string): The ID of the chat session
+- `message_id` (string): The ID of the generated message
+- `retrieved_context` (array): List of context chunks used to generate the response
+
+### ContextChunk
+- `chunk_id` (string): Unique identifier for the context chunk
+- `text` (string): The actual text of the chunk
+- `similarity_score` (number): Similarity score between query and chunk (0.0-1.0)
+
+### ChatMessage
+- `message_id` (string): Unique identifier for the message
+- `role` (string): Either "user" or "assistant"
+- `content` (string): The content of the message
+- `timestamp` (string): ISO 8601 timestamp
+- `confidence_level` (string): Confidence level for assistant messages

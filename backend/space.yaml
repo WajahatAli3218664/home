@@ -1,0 +1,5 @@
+spec:
+  python_version: "3.11"
+  requirements: "requirements.txt"
+  app_file: "main.py"
+  app_endpoint: "/"

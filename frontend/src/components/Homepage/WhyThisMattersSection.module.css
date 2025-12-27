@@ -1,0 +1,79 @@
+/* Why This Matters Section Styles */
+.whyThisMattersSection {
+  padding: 5rem 0;
+  background-color: #f0f8ff; /* blue-50 */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.textCenter {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0d47a1; /* blue-800 */
+  margin-bottom: 1rem;
+}
+
+.sectionSubtitle {
+  font-size: 1.25rem;
+  color: #0d47a1; /* blue-800 */
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.infoCard {
+  background-color: #e3f2fd; /* blue-100 */
+  padding: 2rem;
+  border-radius: 0.75rem; /* rounded-lg */
+  border: 1px solid #b3e5fc; /* border-blue-200 */
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+
+.infoCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem; /* text-lg */
+  font-weight: bold;
+  color: #0d47a1; /* blue-800 */
+  margin-bottom: 0.5rem;
+}
+
+.cardDescription {
+  color: #0d47a1; /* blue-800 */
+}
