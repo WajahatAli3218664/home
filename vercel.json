@@ -1,5 +1,7 @@
 {
-  "buildCommand": "echo 'No build needed'",
-  "outputDirectory": "api",
-  "installCommand": "echo 'No install needed'"
+  "functions": {
+    "api/**/*.py": {
+      "memory": 512
+    }
+  }
 }
