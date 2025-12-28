@@ -1,3 +1,4 @@
 fastapi==0.115.4
 python-multipart==0.0.20
 mangum>=0.17.0
+pydantic>=2.0.0
