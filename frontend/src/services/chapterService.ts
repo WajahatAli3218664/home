@@ -1,6 +1,6 @@
 import { Chapter } from '../types/chapter';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = (typeof window !== 'undefined' && window.REACT_APP_API_BASE_URL) || 'http://localhost:8000';
 
 export const getAllChapters = async (): Promise<Chapter[]> => {
   try {

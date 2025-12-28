@@ -1,6 +1,6 @@
 import { ProgressRecord } from '../types/progress';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = (typeof window !== 'undefined' && window.REACT_APP_API_BASE_URL) || 'http://localhost:8000';
 
 export const getProgressForUser = async (userId: number): Promise<ProgressRecord[]> => {
   try {

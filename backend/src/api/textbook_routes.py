@@ -10,7 +10,7 @@ from src.auth.authentication import get_current_user
 router = APIRouter()
 
 
-@router.get("/", response_model=List[Textbook])
+@router.get("/", response_model=None)
 def get_textbooks(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -22,7 +22,7 @@ def get_textbooks(
     return textbooks
 
 
-@router.get("/{textbook_id}", response_model=Textbook)
+@router.get("/{textbook_id}", response_model=None)
 def get_textbook(
     textbook_id: int,
     db: Session = Depends(get_db),
@@ -35,7 +35,7 @@ def get_textbook(
     return textbook
 
 
-@router.post("/", response_model=Textbook)
+@router.post("/", response_model=None)
 def create_textbook(
     title: str,
     description: Optional[str] = None,
@@ -54,7 +54,7 @@ def create_textbook(
     return textbook
 
 
-@router.put("/{textbook_id}", response_model=Textbook)
+@router.put("/{textbook_id}", response_model=None)
 def update_textbook(
     textbook_id: int,
     title: Optional[str] = None,

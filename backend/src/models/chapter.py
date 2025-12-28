@@ -13,4 +13,4 @@ class TextbookChapter(Base):
     position = Column(Integer, unique=True, nullable=False)
     word_count = Column(Integer, default=0)
     estimated_reading_time = Column(Integer, default=0)  # in minutes
-    metadata = Column(Text)  # JSON string for additional metadata
+    metadata_json = Column(Text)  # JSON string for additional metadata

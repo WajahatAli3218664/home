@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     # Database Configuration
     database_url: str = "postgresql://username:password@ep-xxx.us-east-1.aws.neon.tech/dbname?sslmode=require"
     neon_database_url: str = ""
+    neon_db_url: Optional[str] = None  # Support both neon_database_url and neon_db_url
 
     # Qdrant Vector Database Configuration
     qdrant_url: str = "https://c7037b66-6e44-4312-9979-db1cb85c4eb5.us-east4-0.gcp.cloud.qdrant.io:6333"
@@ -40,6 +41,7 @@ class Settings(BaseSettings):
     cohere_api_key: Optional[str] = None
     openai_api_key: Optional[str] = None
     groq_api_key: Optional[str] = None
+    groq_model: Optional[str] = "llama-3.3-70b-versatile"  # Current Groq model
     gemini_api_key: Optional[str] = None
 
     # Application Configuration
@@ -56,6 +58,17 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = 'utf-8'
+        extra = "ignore"  # Allow extra fields from env file without validation errors
+
+    @property
+    def effective_database_url(self) -> str:
+        """Return the effective database URL, preferring `neon_database_url` or `neon_db_url` when set."""
+        if self.neon_database_url:
+            return self.neon_database_url
+        elif self.neon_db_url:
+            return self.neon_db_url
+        else:
+            return self.database_url
 
 
 # Create a global settings instance

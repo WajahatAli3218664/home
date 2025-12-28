@@ -1,95 +1,160 @@
 import React, { useState, useRef, useEffect } from 'react';
-import MessageBubble from './MessageBubble';
 import './ChatInterface.css';
 
-const ChatInterface = ({ sessionId, bookId, onSend, messages, loading }) => {
-  const [inputValue, setInputValue] = useState('');
-  const [selectedText, setSelectedText] = useState('');
+const ChatInterface = () => {
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      text: "Hello! I'm your Physical AI and Humanoid Robotics assistant. How can I help you today?",
+      sender: 'bot',
+      timestamp: new Date()
+    }
+  ]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputValue.trim() && onSend) {
-      onSend(inputValue, selectedText);
-      setInputValue('');
-    }
+  const API_URL = 'https://effective-cod-5g46g9pww5pxc7g96-8000.app.github.dev';
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(e);
-    }
-  };
-
-  // Scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    scrollToBottom();
   }, [messages]);
 
+  const sendMessage = async () => {
+    if (!inputMessage.trim()) return;
+
+    const userMessage = {
+      id: Date.now(),
+      text: inputMessage,
+      sender: 'user',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    const currentMessage = inputMessage;
+    setInputMessage('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${API_URL}/api/v1/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: currentMessage,
+          user_id: 'anonymous'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      
+      const botMessage = {
+        id: Date.now() + 1,
+        text: data.response,
+        sender: 'bot',
+        timestamp: new Date(),
+        confidence: data.confidence
+      };
+
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: 'Sorry, I\'m experiencing some technical issues. Please try again.',
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
   return (
-    <div className="chat-interface">
-      <div className="chat-header">
-        <h3>Book Assistant</h3>
-      </div>
-      
-      <div className="chat-messages">
-        {messages && messages.length > 0 ? (
-          messages.map((msg, index) => (
-            <MessageBubble
-              key={index}
-              message={msg.text}
-              isUser={msg.isUser}
-              confidence={msg.confidence}
-            />
-          ))
-        ) : (
-          <div className="empty-state">
-            Ask a question about the book content, and I'll do my best to answer based on the provided text.
-          </div>
-        )}
-        {loading && (
-          <MessageBubble
-            message="Thinking..."
-            isUser={false}
-            isTyping={true}
-          />
-        )}
-        <div ref={messagesEndRef} />
-      </div>
-      
-      <form className="chat-input-form" onSubmit={handleSubmit}>
-        {selectedText && (
-          <div className="selected-text-indicator">
-            Using selected text: "{selectedText.substring(0, 50)}{selectedText.length > 50 ? '...' : ''}"
-            <button 
-              type="button" 
-              className="clear-selection"
-              onClick={() => setSelectedText('')}
-            >
-              Clear
-            </button>
-          </div>
-        )}
-        <div className="input-area">
+    <>
+      {/* Floating Chat Button */}
+      <button 
+        className={`chat-toggle-btn ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle chat"
+      >
+        {isOpen ? '✕' : '💬'}
+      </button>
+
+      {/* Chat Window */}
+      <div className={`chat-container ${isOpen ? 'open' : ''}`}>
+        <div className="chat-header">
+          <h3>AI Assistant</h3>
+          <span className="status-indicator">Online</span>
+        </div>
+        
+        <div className="chat-messages">
+          {messages.map((message) => (
+            <div key={message.id} className={`message ${message.sender}`}>
+              <div className="message-content">
+                <p>{message.text}</p>
+                {message.confidence && (
+                  <span className="confidence-badge">
+                    Confidence: {Math.round(message.confidence * 100)}%
+                  </span>
+                )}
+              </div>
+              <span className="timestamp">
+                {message.timestamp.toLocaleTimeString()}
+              </span>
+            </div>
+          ))}
+          {isLoading && (
+            <div className="message bot">
+              <div className="message-content">
+                <div className="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="chat-input-container">
           <textarea
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask a question about the book..."
-            disabled={loading}
-            rows="1"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Ask your question here..."
+            disabled={isLoading}
+            rows={2}
           />
           <button 
-            type="submit" 
-            disabled={!inputValue.trim() || loading}
+            onClick={sendMessage} 
+            disabled={isLoading || !inputMessage.trim()}
             className="send-button"
           >
-            Send
+            {isLoading ? '⏳' : '📤'}
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 

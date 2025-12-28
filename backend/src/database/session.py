@@ -1,5 +1,5 @@
 from sqlmodel import create_engine, Session
-from .config.settings import settings
+from ..config.settings import settings
 
 
 # Create the database engine using the effective database URL

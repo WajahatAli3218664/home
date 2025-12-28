@@ -9,7 +9,7 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-@router.get("/{chapter_id}", response_model=List[LearningMaterials])
+@router.get("/{chapter_id}", response_model=None)
 def get_learning_materials_by_chapter(
     chapter_id: int,
     material_type: str = None,

@@ -9,7 +9,7 @@ from src.auth.authentication import get_current_user
 router = APIRouter()
 
 
-@router.get("/", response_model=List[LearningModule])
+@router.get("/", response_model=None)
 def get_learning_modules(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -23,7 +23,7 @@ def get_learning_modules(
     return modules
 
 
-@router.get("/{module_id}", response_model=LearningModule)
+@router.get("/{module_id}", response_model=None)
 def get_learning_module(
     module_id: int,
     db: Session = Depends(get_db),
@@ -40,7 +40,7 @@ def get_learning_module(
     return module
 
 
-@router.post("/", response_model=LearningModule)
+@router.post("/", response_model=None)
 def create_learning_module(
     title: str,
     content: str,
@@ -72,7 +72,7 @@ def create_learning_module(
     return module
 
 
-@router.put("/{module_id}", response_model=LearningModule)
+@router.put("/{module_id}", response_model=None)
 def update_learning_module(
     module_id: int,
     title: Optional[str] = None,

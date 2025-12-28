@@ -1,7 +1,7 @@
 """
-LLM service using OpenAI Agents and Groq model
+LLM service using Groq and OpenAI models
 """
-import openai
+from openai import OpenAI
 from groq import Groq
 from typing import Optional
 from ..config.settings import settings
@@ -18,8 +18,11 @@ class LLMService:
         self.groq_client = Groq(api_key=settings.groq_api_key)
         self.groq_model = settings.groq_model
         
-        # Initialize OpenAI client as backup
-        openai.api_key = settings.openai_api_key
+        # Initialize OpenAI client as backup (v1.0.0+ syntax)
+        if settings.openai_api_key:
+            self.openai_client = OpenAI(api_key=settings.openai_api_key)
+        else:
+            self.openai_client = None
         self.openai_model = "gpt-3.5-turbo"  # Default fallback model
     
     def generate_response(self, query: str, context: str) -> str:
@@ -60,9 +63,12 @@ class LLMService:
             print(f"Error calling Groq API: {str(e)}")
             print("Falling back to OpenAI API")
 
-            # Fallback to OpenAI API
+            # Fallback to OpenAI API (v1.0.0+ syntax)
+            if not self.openai_client:
+                raise Exception("No OpenAI API key configured for fallback")
+            
             try:
-                response = openai.ChatCompletion.create(
+                response = self.openai_client.chat.completions.create(
                     model=self.openai_model,
                     messages=[
                         {"role": "system", "content": formatted_prompt["system"]},
@@ -72,8 +78,8 @@ class LLMService:
                     max_tokens=500  # Limit response length
                 )
 
-                # Extract the response text
-                return response.choices[0].message['content'].strip()
+                # Extract the response text (v1.0.0+ syntax)
+                return response.choices[0].message.content.strip()
 
             except Exception as e:
                 # Handle any errors from the API

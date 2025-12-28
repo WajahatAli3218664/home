@@ -76,6 +76,8 @@ app.add_middleware(
         "https://*.github.io",        # GitHub Pages
         "https://huggingface.co",      # Hugging Face main site
     ],
+    # Allow app.github.dev preview domains used by the development environment (wildcard via regex)
+    allow_origin_regex=r"https?://.*\.app\.github\.dev(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 // Get environment variables and make them available to the client
-const BACKEND_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+const BACKEND_URL = process.env.BACKEND_URL || 'https://effective-cod-5g46g9pww5pxc7g96-8000.app.github.dev';
 
 const config: Config = {
   title: 'Physical AI & Humanoid Robotics Textbook',
@@ -95,11 +95,11 @@ const config: Config = {
           items: [
             {
               label: 'Sign Up',
-              to: '/signup',
+              to: '#signup',
             },
             {
-              label: 'Sign In',
-              to: '/signin',
+              label: 'Sign In', 
+              to: '#signin',
             },
             {
               label: 'Profile',
@@ -184,7 +184,7 @@ const config: Config = {
 
   // Custom fields to bypass Docusaurus config validation
   customFields: {
-    REACT_APP_API_BASE_URL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
+    REACT_APP_API_BASE_URL: BACKEND_URL,
   },
 
 };
