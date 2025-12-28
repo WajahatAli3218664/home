@@ -129,4 +129,4 @@ def get_chapters():
     ]
     return {"chapters": chapters}
 
-handler = Mangum(app)
+handler = Mangum(app, lifespan="off")
