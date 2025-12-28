@@ -41,7 +41,12 @@ class handler(BaseHTTPRequestHandler):
                 resp = "Robots use multiple sensors: cameras for vision, IMUs for orientation, LIDAR for distance, and force sensors for touch."
             # Default
             else:
-                resp = "I can help with robotics topics like locomotion, control systems, computer vision, AI, sensors, and ROS. What would you like to know?"
+                # Check if question is about robotics
+                robotics_keywords = ['robot', 'ai', 'machine', 'sensor', 'control', 'vision', 'learning', 'automation']
+                if any(keyword in msg for keyword in robotics_keywords):
+                    resp = "I can help with robotics topics like locomotion, control systems, computer vision, AI, sensors, and ROS. What would you like to know?"
+                else:
+                    resp = "I'm specialized in Physical AI and Robotics. I can answer questions about robot design, control systems, sensors, AI, and humanoid systems. How can I help you with robotics?"
             
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
