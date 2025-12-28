@@ -12,7 +12,8 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps({'message': 'Physical AI Backend with LLM', 'status': 'running'}).encode())
     
     def do_POST(self):
-        if self.path == '/api/v1/chat':
+        # Accept both '/api/v1/chat' and '/api/v1/chat/' (trailing slash differences)
+        if self.path.startswith('/api/v1/chat'):
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode())
             user_msg = body.get('message', '')
@@ -52,19 +53,34 @@ class handler(BaseHTTPRequestHandler):
                 with url_request.urlopen(groq_request, timeout=15) as response:
                     result = json.loads(response.read().decode('utf-8'))
                     ai_response = result['choices'][0]['message']['content']
-                
+
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(json.dumps({'response': ai_response, 'confidence': 0.95}).encode('utf-8'))
-                
+
             except Exception as e:
+                # Try to surface HTTP error details when available
+                err_msg = str(e)
+                try:
+                    # If it's an HTTPError from urllib, it may have a code and read() method
+                    if hasattr(e, 'code'):
+                        err_msg = f'HTTP Error {e.code}: {getattr(e, "reason", "Forbidden")}'
+                        try:
+                            body = e.read().decode('utf-8')
+                            # don't expose sensitive tokens, but include provider message
+                            err_msg += f" - {body[:500]}"
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
+
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
-                self.wfile.write(json.dumps({'response': f'Error: {str(e)}', 'confidence': 0.5}).encode('utf-8'))
+                self.wfile.write(json.dumps({'response': f'Error: {err_msg}', 'confidence': 0.5}).encode('utf-8'))
         else:
             self.send_response(404)
             self.end_headers()
