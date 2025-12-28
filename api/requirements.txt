@@ -1,24 +1,13 @@
 fastapi==0.115.4
 uvicorn[standard]==0.32.1
 python-multipart==0.0.20
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-pydantic-settings==2.7.0
-psycopg2-binary==2.9.10
-sqlmodel==0.0.22
-cohere>=4.0
-qdrant-client>=1.9
-beautifulsoup4>=4.12
-requests>=2.31
 python-dotenv>=1.0
-pytest>=8.0
-openai>=1.0.0
-langchain>=0.2.0
-langchain-openai>=0.1.0
-google-generativeai>=0.6.0
-mangum>=0.17.0
-sentence-transformers>=2.0.0
-torch>=2.0.0
-transformers>=4.0.0
-scikit-learn>=1.0.0
-groq>=0.9.0
+requests>=2.31
+# NOTE: Heavy ML / optional libraries (torch, transformers, sentence-transformers,
+# langchain, scikit-learn, etc.) have been moved to `requirements-full.txt` to
+# avoid Out Of Memory (OOM) events during Vercel builds. Install them locally
+# or in a dedicated ML service with:
+#
+#   pip install -r api/requirements-full.txt
+#
+# Keep `api/requirements.txt` minimal so Vercel can install only runtime deps.
