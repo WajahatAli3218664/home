@@ -1,4 +1,2 @@
-fastapi==0.115.4
-pydantic==2.7.0
-python-dotenv==1.0.0
-mangum==0.17.0
+fastapi
+mangum
