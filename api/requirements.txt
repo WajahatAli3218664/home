@@ -3,11 +3,4 @@ uvicorn[standard]==0.32.1
 python-multipart==0.0.20
 python-dotenv>=1.0
 requests>=2.31
-# NOTE: Heavy ML / optional libraries (torch, transformers, sentence-transformers,
-# langchain, scikit-learn, etc.) have been moved to `requirements-full.txt` to
-# avoid Out Of Memory (OOM) events during Vercel builds. Install them locally
-# or in a dedicated ML service with:
-#
-#   pip install -r api/requirements-full.txt
-#
-# Keep `api/requirements.txt` minimal so Vercel can install only runtime deps.
+mangum>=0.17.0
