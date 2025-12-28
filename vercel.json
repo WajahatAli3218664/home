@@ -1,7 +1,15 @@
 {
-  "functions": {
-    "api/**/*.py": {
-      "memory": 512
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/chat.py"
+    }
+  ]
 }
