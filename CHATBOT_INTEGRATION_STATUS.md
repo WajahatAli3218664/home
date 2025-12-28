@@ -98,11 +98,11 @@ curl -X POST http://localhost:8000/api/v1/rag/query \
 ## Environment Variables Configured
 
 ```
-GROQ_API_KEY=<GROQ_API_KEY>
-QDRANT_URL=https://7d62177a-7a83-480c-90bf-02b1106f21bb.europe-west3-0.gcp.cloud.qdrant.io
-QDRANT_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.rA4brrsVAD5sIqVesepoIyc15mRA6hJI56Kfp96mwzk
-NEON_DB_URL=postgresql://neondb_owner:npg_pZt5hrPVd4GX@ep-curly-heart-a49a7wqz-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
-DATABASE_URL=postgresql://neondb_owner:npg_pZt5hrPVd4GX@ep-curly-heart-a49a7wqz-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+GROQ_API_KEY=<your_groq_api_key>
+QDRANT_URL=<your_qdrant_url>
+QDRANT_API_KEY=<your_qdrant_api_key>
+NEON_DB_URL=<your_neon_db_url>
+DATABASE_URL=<your_database_url>
 ```
 
 All keys are properly stored in `.env` file and loaded automatically.
