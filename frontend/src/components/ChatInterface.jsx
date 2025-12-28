@@ -15,7 +15,11 @@ const ChatInterface = () => {
   const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const API_URL = 'https://effective-cod-5g46g9pww5pxc7g96-8000.app.github.dev';
+  const API_URL = typeof window !== 'undefined' 
+    ? (window.location.hostname === 'localhost' 
+      ? 'http://localhost:8000' 
+      : window.location.origin)
+    : 'http://localhost:8000';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

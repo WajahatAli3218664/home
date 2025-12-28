@@ -1,36 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "api/[[...path]].py": {
-      "runtime": "python3.10",
-      "maxLambdaSize": "15mb",
-      "memory": 1024,
-      "timeout": 30
-    }
-  },
-  "routes": [
+  "builds": [
     {
-      "src": "/api/v1/(.*)",
-      "dest": "/api/[[...path]].py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "src": "api/[[...path]].py",
+      "use": "@vercel/python"
     }
   ],
-  "env": {
-    "QDRANT_URL": "$QDRANT_URL",
-    "QDRANT_API_KEY": "$QDRANT_API_KEY",
-    "OPENAI_API_KEY": "$OPENAI_API_KEY",
-    "DATABASE_URL": "$DATABASE_URL",
-    "SIMILARITY_THRESHOLD": "0.6",
-    "API_HOST": "0.0.0.0",
-    "API_PORT": "8000",
-    "API_TITLE": "Textbook Generation API",
-    "API_DESCRIPTION": "API for generating textbooks using AI",
-    "API_VERSION": "1.0.0",
-    "SECRET_KEY": "$SECRET_KEY",
-    "CONTEXT7_API_KEY": "$CONTEXT7_API_KEY",
-    "CONTEXT7_BASE_URL": "$CONTEXT7_BASE_URL"
-  }
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/[[...path]].py"
+    }
+  ]
 }
