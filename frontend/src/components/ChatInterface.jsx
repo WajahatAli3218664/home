@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatInterface.css';
+import config from '../config/env';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState([
@@ -15,11 +16,7 @@ const ChatInterface = () => {
   const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const API_URL = typeof window !== 'undefined' 
-    ? (window.location.hostname === 'localhost' 
-      ? 'http://localhost:8000' 
-      : window.location.origin)
-    : 'http://localhost:8000';
+  const API_URL = config.BACKEND_API_URL;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
