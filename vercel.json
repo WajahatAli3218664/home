@@ -1,15 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/[[...path]].py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "api/[[...path]].py"
-    }
-  ]
+  "buildCommand": "echo 'No build needed'",
+  "outputDirectory": "api",
+  "installCommand": "echo 'No install needed'"
 }
