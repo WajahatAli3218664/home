@@ -36,13 +36,13 @@ class handler(BaseHTTPRequestHandler):
                 groq_request = url_request.Request(
                     'https://api.groq.com/openai/v1/chat/completions',
                     data=json.dumps({
-                        "model": "llama-3.3-70b-versatile",
+                        "model": "llama-3.1-8b-instant",
                         "messages": [
-                            {"role": "system", "content": "You are a helpful Physical AI and Humanoid Robotics expert. Keep responses concise (2-3 sentences)."},
+                            {"role": "system", "content": "You are an expert AI assistant for a Physical AI and Humanoid Robotics textbook. You have deep knowledge about embodied intelligence, humanoid robot design, locomotion, manipulation, perception, control systems, machine learning, and robotics applications. Provide helpful, accurate, and educational responses."},
                             {"role": "user", "content": user_msg}
                         ],
                         "temperature": 0.7,
-                        "max_tokens": 200
+                        "max_tokens": 500
                     }).encode('utf-8'),
                     headers={
                         'Authorization': f'Bearer {groq_key}',
