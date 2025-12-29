@@ -1,44 +1,96 @@
 /* Hero Section Styles */
 .heroSection {
-  padding: 4rem 0;
-  background: linear-gradient(to right, #e3f2fd 0%, #b3e5fc 100%);
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100px); }
 }
 
 .heroContainer {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .platformLabel {
   font-size: 0.875rem;
-  font-weight: 600;
-  color: #4b5563;
+  font-weight: 700;
+  color: #fbbf24;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .heroTitle {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #1f2937;
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
   line-height: 1.1;
   margin-bottom: 1.5rem;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 768px) {
   .heroTitle {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
   }
 }
 
 .heroSubtitle {
-  font-size: 1.25rem;
-  color: #4b5563;
+  font-size: 1.35rem;
+  color: rgba(255,255,255,0.95);
   max-width: 48rem;
-  margin: 0 auto 2rem;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .heroButtons {
@@ -46,7 +98,8 @@
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  animation: fadeIn 1.4s ease-out;
 }
 
 @media (min-width: 640px) {
@@ -57,40 +110,44 @@
 }
 
 .getStartedBtn {
-  background-color: #2196F3;
-  color: white;
-  font-weight: bold;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1f2937;
+  font-weight: 800;
   font-size: 1.125rem;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+  transition: all 0.3s;
   text-decoration: none;
   display: inline-block;
+  border: none;
 }
 
 .getStartedBtn:hover {
-  background-color: #0d8aee;
-  transform: scale(1.05);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(251, 191, 36, 0.6);
+  color: #1f2937;
 }
 
 .browseContentBtn {
-  background-color: white;
-  color: #1f2937;
-  font-weight: bold;
+  background-color: rgba(255,255,255,0.15);
+  color: white;
+  font-weight: 700;
   font-size: 1.125rem;
-  padding: 0.75rem 2rem;
-  border: 1px solid #b3e5fc;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s;
+  padding: 1rem 2.5rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
   text-decoration: none;
   display: inline-block;
 }
 
 .browseContentBtn:hover {
-  background-color: #e3f2fd;
-  transform: scale(1.05);
+  background-color: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-3px);
+  color: white;
 }
 
 .technologyPills {
@@ -98,12 +155,22 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  animation: fadeIn 1.6s ease-out;
 }
 
 .techPill {
-  background-color: #b3e5fc;
-  color: #1f2937;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
   font-size: 0.875rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+
+.techPill:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
 }

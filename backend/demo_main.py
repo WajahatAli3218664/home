@@ -37,7 +37,9 @@ app.add_middleware(
         "https://*.vercel.app",
         "https://*.github.io",
         "https://effective-cod-5g46g9pww5pxc7g96-3000.app.github.dev",
-        "https://effective-cod-5g46g9pww5pxc7g96-8000.app.github.dev"
+        "https://effective-cod-5g46g9pww5pxc7g96-8000.app.github.dev",
+        "https://home-pi-one.vercel.app",
+        "https://home-cycxez9ru-wajahat-alis-projects-0e7870c5.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
